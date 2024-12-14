@@ -676,3 +676,53 @@ var animateReveal = function() {
 
 }
 
+const canvas = document.getElementById('backgroundCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const ellipses = [];
+const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF'];
+
+function createEllipse() {
+  return {
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radiusX: Math.random() * 100 + 50,
+    radiusY: Math.random() * 50 + 25,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    dx: (Math.random() - 0.5) * 2,
+    dy: (Math.random() - 0.5) * 2
+  };
+}
+
+for (let i = 0; i < 10; i++) {
+  ellipses.push(createEllipse());
+}
+
+function drawEllipse(ellipse) {
+  ctx.beginPath();
+  ctx.ellipse(ellipse.x, ellipse.y, ellipse.radiusX, ellipse.radiusY, 0, 0, 2 * Math.PI);
+  ctx.fillStyle = ellipse.color;
+  ctx.fill();
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ellipses.forEach(ellipse => {
+    ellipse.x += ellipse.dx;
+    ellipse.y += ellipse.dy;
+
+    if (ellipse.x + ellipse.radiusX > canvas.width || ellipse.x - ellipse.radiusX < 0) {
+      ellipse.dx = -ellipse.dx;
+    }
+    if (ellipse.y + ellipse.radiusY > canvas.height || ellipse.y - ellipse.radiusY < 0) {
+      ellipse.dy = -ellipse.dy;
+    }
+
+    drawEllipse(ellipse);
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
