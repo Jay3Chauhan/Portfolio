@@ -1339,7 +1339,7 @@ function generateProjectStructuredData() {
             "author": {
                 "@type": "Person",
                 "name": "Jay Chauhan",
-                "url": "https://jaychauhan.me/"
+                "url": "https://jaychauhan.tech/"
             }
         });
     });
