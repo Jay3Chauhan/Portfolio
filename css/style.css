@@ -2783,3 +2783,11 @@ a, button, .btn, input[type="submit"], .nav-link, .project-card, .skill-card, .b
         height: 280px;
     }
 }
+
+/* Badge Description */
+.badge-description {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
