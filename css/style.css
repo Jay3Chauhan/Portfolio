@@ -719,11 +719,12 @@ a, button, .btn, input[type="submit"], .nav-link, .project-card, .skill-card, .b
 
 .hero-tagline {
     color: var(--accent-primary);
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 200;
     margin-bottom: 1rem;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-transform: none;
     opacity: 0;
     animation: slide-up 0.6s forwards;
     animation-delay: 0.2s;
