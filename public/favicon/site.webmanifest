@@ -1,0 +1,20 @@
+{
+  "name": "Jay Chauhan | Portfolio",
+  "short_name": "Jay Chauhan",
+  "icons": [
+    {
+      "src": "/favicon/Icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon/Icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#c9f31d",
+  "background_color": "#0a0a0b",
+  "display": "standalone",
+  "start_url": "/"
+}
