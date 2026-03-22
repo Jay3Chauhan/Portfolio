@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: portfolio
+    runtime: node
+    runtimeVersion: 20.11.1
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    port: 3000
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NPM_DEFAULT_REGISTRY
+        value: https://registry.npmjs.org/
+
+# Node.js 20.11.1 - stable LTS version, supports Next.js 15.1
+# Environment variables for your app
+# Add more environment variables as needed in Render dashboard

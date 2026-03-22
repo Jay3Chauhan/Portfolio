@@ -45,4 +45,6 @@ index.html
 
 # Local deployment docs (not committed to repo)
 RENDER_*.md
-render.yaml
+DEPLOYMENT_SUMMARY.md
+SEO_VERIFICATION_REPORT.md
+SEO_AUDIT.md
