@@ -42,3 +42,7 @@ Thumbs.db
 *.pem
 old_portfolio_index.html
 index.html
+
+# Local deployment docs (not committed to repo)
+RENDER_*.md
+render.yaml
