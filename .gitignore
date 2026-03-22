@@ -43,8 +43,10 @@ Thumbs.db
 old_portfolio_index.html
 index.html
 
+# Vercel
+.vercel
+
 # Local deployment docs (not committed to repo)
-RENDER_*.md
 DEPLOYMENT_SUMMARY.md
 SEO_VERIFICATION_REPORT.md
-SEO_AUDIT.md
+RENDER_*.md
