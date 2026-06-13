@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Jay Chauhan — Portfolio",
     short_name: "Jay Chauhan",
     description:
-      "Full Stack Developer & Mobile App Engineer building impactful digital experiences.",
+      "Backend & AI Engineer building scalable fintech systems and GenAI pipelines.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a0a0b",

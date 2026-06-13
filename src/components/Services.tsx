@@ -5,55 +5,55 @@ import ScrollReveal from "./ScrollReveal";
 const SERVICES = [
   {
     number: "01",
-    icon: "📱",
-    title: "Mobile App Development",
-    desc: "Building high-performance, cross-platform applications using Flutter with beautiful UI, smooth animations, and native-like performance on both iOS and Android.",
+    icon: "🐍",
+    title: "Backend Engineering",
+    desc: "Building production-grade microservices with Python and FastAPI — async APIs, WebSocket streams, JWT/OAuth security, and NGINX reverse proxy deployments.",
     delay: 0,
   },
   {
     number: "02",
-    icon: "🏦",
-    title: "Fintech Solutions",
-    desc: "Developing secure financial applications with real-time data streaming, market analytics, portfolio tracking, and compliance with industry security standards.",
+    icon: "🤖",
+    title: "Generative AI & RAG",
+    desc: "Designing RAG pipelines with LangChain, vector databases (Qdrant), and LLM integration (Groq LLaMA). Citation-enforced grounding with RAGAS evaluation benchmarks.",
     delay: 1,
   },
   {
     number: "03",
-    icon: "☁️",
-    title: "Cloud & Backend",
-    desc: "Architecting scalable backend systems with Firebase, Node.js, and Python. Cloud deployment on Azure and GCP with CI/CD pipelines and monitoring.",
+    icon: "🏦",
+    title: "Fintech Solutions",
+    desc: "Developing secure financial backends with real-time data streaming, market analytics, portfolio tracking, Account Aggregator integration, and regulatory compliance.",
     delay: 2,
   },
   {
     number: "04",
     icon: "🔌",
-    title: "API Integration",
-    desc: "Connecting applications to third-party services, payment gateways, social APIs, and custom REST endpoints with proper error handling and caching.",
+    title: "API & Data Pipelines",
+    desc: "Designing REST/WebSocket APIs, real-time data pipelines, Selenium scrapers, and CronJob-based data sync systems with Redis caching for high-frequency workflows.",
     delay: 0,
   },
   {
     number: "05",
-    icon: "🎨",
-    title: "UI/UX Design",
-    desc: "Creating intuitive, accessible interfaces with attention to detail — animations, micro-interactions, responsive layouts, and user-centered design principles.",
+    icon: "☁️",
+    title: "Cloud & DevOps",
+    desc: "Containerized deployments with Docker, NGINX load balancing, GCP/Azure cloud services, GitHub Actions CI/CD, and production monitoring infrastructure.",
     delay: 1,
   },
   {
     number: "06",
-    icon: "🤖",
-    title: "AI & ML Integration",
-    desc: "Integrating machine learning models into applications — face recognition, predictive analytics, and AI-powered features using TensorFlow and OpenCV.",
+    icon: "🗄️",
+    title: "Database Architecture",
+    desc: "Multi-database design spanning PostgreSQL, MySQL, and MongoDB for structured financial data, high-frequency transactions, and vector storage for AI applications.",
     delay: 2,
   },
 ];
 
-const CP_TECH = ["Flutter", "FastAPI", "MongoDB", "Firebase", "Finvu SDK"];
+const CP_TECH = ["Python", "LangChain", "Qdrant", "Groq LLaMA", "FastAPI"];
 
 const CP_STATS = [
-  { label: "Platform", value: "iOS + Android" },
-  { label: "Backend", value: "Python FastAPI" },
-  { label: "Database", value: "MongoDB Atlas" },
-  { label: "Status", value: "In Development", color: "#22c55e" },
+  { label: "Type", value: "RAG System" },
+  { label: "LLM", value: "Groq LLaMA-3.3-70B" },
+  { label: "Vector DB", value: "Qdrant Cloud" },
+  { label: "Status", value: "Active Development", color: "#22c55e" },
 ];
 
 export default function Services() {
@@ -68,8 +68,8 @@ export default function Services() {
         </ScrollReveal>
         <ScrollReveal>
           <p className="section-desc">
-            From concept to deployment, I cover the full spectrum of mobile and
-            web development.
+            From backend architecture to AI integration, I build scalable
+            systems end-to-end.
           </p>
         </ScrollReveal>
 
@@ -93,12 +93,12 @@ export default function Services() {
                 <span className="cp-live" />
                 Currently Building
               </div>
-              <h3>Finculate — Wealth Monitor</h3>
+              <h3>ComplianceIQ — Regulatory RAG System</h3>
               <p>
-                A comprehensive wealth monitoring and portfolio tracking
-                application integrating with Account Aggregator services.
-                Real-time financial insights, investment tracking, and secure
-                data handling built for the Indian fintech ecosystem.
+                An intelligent RBI/SEBI regulatory compliance system powered by
+                RAG pipelines. Ingests regulatory PDFs, performs category-filtered
+                vector retrieval, and generates citation-grounded answers using
+                Groq LLaMA for the Indian fintech ecosystem.
               </p>
               <div className="cp-tech">
                 {CP_TECH.map((tech) => (

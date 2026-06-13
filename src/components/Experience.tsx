@@ -6,12 +6,31 @@ const EXPERIENCES = [
   {
     role: "Software Engineer",
     company: "Arhamshare Pvt Ltd.",
-    date: "2023 — Present",
+    date: "Jan 2024 — Present",
     points: [
-      "Developing a trading application using Flutter for smooth, performant UX across iOS and Android devices.",
-      "Implemented StreamBuilder for real-time stock data updates and market movements within the app.",
-      "Utilized Provider for efficient state management, ensuring data consistency throughout the application.",
-      "Designed and built data visualization interfaces for effective market trend analysis.",
+      "Built FastAPI microservices for trading, mutual fund, and Account Aggregator data workflows; configured NGINX with SSL termination and load balancing serving 1k–10k users.",
+      "Integrated Finvu SDK with RBI Account Aggregator framework, implementing end-to-end FIP/FIU consent flows; secured 8+ backend services with JWT/OAuth 2.0.",
+      "Developed full Mutual Fund platform backend — NAV tracking, scheme discovery, portfolio aggregation; built Selenium scrapers + CronJobs for auto-sync from external sources.",
+      "Designed MySQL, PostgreSQL, and MongoDB schemas for financial data and high-frequency transactional workflows; prototyped LLM-based financial Q&A for user-facing insights.",
+      "Reduced production defects by 30% across 40+ components via unit/regression testing; contributed to Agile sprints, code reviews, and API architecture documentation.",
+    ],
+  },
+  {
+    role: "Software Engineer Intern",
+    company: "Toshal Infotech Pvt. Ltd.",
+    date: "Jul 2023 — Sep 2023",
+    points: [
+      "Collaborated with senior developers to enhance UI/UX in Flutter, boosting user engagement by 15%.",
+      "Optimized code to reduce app crashes by 25%; contributed to 3 major Agile sprints with 100% on-time delivery.",
+    ],
+  },
+  {
+    role: "Microsoft Engage Mentee 2022",
+    company: "Microsoft",
+    date: "Apr 2022 — Jun 2022",
+    points: [
+      "Created a browser-based Face Recognition attendance system using Django, Python, and OpenCV with 7% speed improvement.",
+      "Built the system to capture faces and store attendance data with multi-face simultaneous detection.",
     ],
   },
   {
@@ -19,26 +38,8 @@ const EXPERIENCES = [
     company: "Google",
     date: "2022 — 2023",
     points: [
-      "Founded GDSC on campus, aligning with club objectives and streamlining team collaboration.",
-      "Led 17 students, organized 10+ events — achieved 191.8% growth with 508 official members.",
-      "Cultivated partnerships with community organizations resulting in impactful collaborations.",
-    ],
-  },
-  {
-    role: "Microsoft Engage Intern 2022",
-    company: "Microsoft, Bangalore",
-    date: "2022",
-    points: [
-      "Developed a browser-based Face Recognition attendance system using Django, Python, and OpenCV.",
-      "Built the system to capture faces and store attendance data with multi-face simultaneous detection.",
-    ],
-  },
-  {
-    role: "GDSC WoW Gujarat Organizer",
-    company: "GDSC, India",
-    date: "2022",
-    points: [
-      "Planned and executed the first offline GDSC WOW event in Gujarat — team of 70, 800+ attendees.",
+      "Founded GDSC on campus — led 17 students, organized 10+ events, achieved 191.8% growth with 508 official members.",
+      "Cultivated 5+ partnerships with organizations and hosted 3+ industry speaker sessions for 120+ club members.",
     ],
   },
 ];

@@ -7,29 +7,39 @@ const SKILL_CATEGORIES = [
   {
     title: "Languages",
     skills: [
-      { name: "Dart", level: 92 },
-      { name: "C", level: 90 },
-      { name: "Python", level: 86 },
+      { name: "Python", level: 94 },
       { name: "Java", level: 80 },
-      { name: "JavaScript", level: 78 },
+      { name: "JavaScript / Node.js", level: 78 },
+      { name: "Dart", level: 75 },
     ],
   },
   {
-    title: "Frameworks & Tools",
+    title: "Frameworks & Libraries",
     skills: [
-      { name: "Flutter", level: 93 },
-      { name: "Firebase", level: 88 },
-      { name: "Node.js", level: 75 },
-      { name: "Git / GitHub", level: 84 },
-      { name: "REST APIs", level: 86 },
+      { name: "FastAPI", level: 93 },
+      { name: "LangChain / LangGraph", level: 88 },
+      { name: "Selenium", level: 82 },
+      { name: "REST APIs / WebSockets", level: 90 },
+      { name: "Pydantic v2", level: 86 },
     ],
   },
   {
-    title: "Cloud & DevOps",
+    title: "AI / ML",
     skills: [
-      { name: "Google Cloud (GCP)", level: 80 },
-      { name: "Microsoft Azure", level: 78 },
-      { name: "MongoDB Atlas", level: 82 },
+      { name: "RAG Pipelines", level: 88 },
+      { name: "Vector Embeddings (Qdrant)", level: 85 },
+      { name: "LLM Integration (Groq)", level: 84 },
+      { name: "RAGAS Evaluation", level: 78 },
+    ],
+  },
+  {
+    title: "Databases & DevOps",
+    skills: [
+      { name: "PostgreSQL / MySQL", level: 90 },
+      { name: "MongoDB", level: 85 },
+      { name: "Docker / NGINX", level: 84 },
+      { name: "GCP / Azure", level: 80 },
+      { name: "GitHub Actions / CI/CD", level: 78 },
     ],
   },
 ];
@@ -130,23 +140,23 @@ export default function Skills() {
                 Core<br />Skills
               </div>
               <div className="orbit-ring" style={{ width: 200, height: 200 }}>
-                <div className="orbit-item" style={{ top: -12, left: "50%", transform: "translateX(-50%)" }}>Flutter</div>
-                <div className="orbit-item" style={{ bottom: -12, left: "50%", transform: "translateX(-50%)" }}>Firebase</div>
-                <div className="orbit-item" style={{ left: -20, top: "50%", transform: "translateY(-50%)" }}>Dart</div>
-                <div className="orbit-item" style={{ right: -20, top: "50%", transform: "translateY(-50%)" }}>Git</div>
+                <div className="orbit-item" style={{ top: -12, left: "50%", transform: "translateX(-50%)" }}>Python</div>
+                <div className="orbit-item" style={{ bottom: -12, left: "50%", transform: "translateX(-50%)" }}>FastAPI</div>
+                <div className="orbit-item" style={{ left: -30, top: "50%", transform: "translateY(-50%)" }}>LangChain</div>
+                <div className="orbit-item" style={{ right: -20, top: "50%", transform: "translateY(-50%)" }}>RAG</div>
               </div>
               <div className="orbit-ring" style={{ width: 320, height: 320 }}>
-                <div className="orbit-item" style={{ top: -12, left: "30%" }}>Python</div>
-                <div className="orbit-item" style={{ bottom: -12, right: "15%" }}>Java</div>
-                <div className="orbit-item" style={{ left: -30, top: "35%" }}>Azure</div>
-                <div className="orbit-item" style={{ right: -20, bottom: "30%" }}>GCP</div>
-                <div className="orbit-item" style={{ top: "20%", right: "5%" }}>Node.js</div>
+                <div className="orbit-item" style={{ top: -12, left: "30%" }}>PostgreSQL</div>
+                <div className="orbit-item" style={{ bottom: -12, right: "15%" }}>MongoDB</div>
+                <div className="orbit-item" style={{ left: -30, top: "35%" }}>Docker</div>
+                <div className="orbit-item" style={{ right: -20, bottom: "30%" }}>Qdrant</div>
+                <div className="orbit-item" style={{ top: "20%", right: "5%" }}>Groq</div>
               </div>
               <div className="orbit-ring" style={{ width: 420, height: 420 }}>
-                <div className="orbit-item" style={{ top: -12, right: "20%" }}>OpenCV</div>
-                <div className="orbit-item" style={{ bottom: -12, left: "25%" }}>Django</div>
-                <div className="orbit-item" style={{ left: -30, bottom: "30%" }}>REST APIs</div>
-                <div className="orbit-item" style={{ right: -35, top: "40%" }}>Stripe</div>
+                <div className="orbit-item" style={{ top: -12, right: "20%" }}>NGINX</div>
+                <div className="orbit-item" style={{ bottom: -12, left: "25%" }}>Redis</div>
+                <div className="orbit-item" style={{ left: -30, bottom: "30%" }}>WebSockets</div>
+                <div className="orbit-item" style={{ right: -45, top: "40%" }}>Selenium</div>
               </div>
             </div>
           </ScrollReveal>

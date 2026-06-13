@@ -12,48 +12,49 @@ export default function About() {
             <div className="about-text">
               <div className="section-label">About Me</div>
               <h2 className="section-title">
-                Crafting Digital Experiences That Matter
+                Engineering Intelligent Systems That Scale
               </h2>
               <p>
                 As a{" "}
                 <strong>
-                  Software Engineer and Mobile Application Developer
+                  Software Engineer specializing in Backend &amp; AI
                 </strong>{" "}
                 with a solid grounding in Computer Science and Engineering from{" "}
-                <strong>Gujarat Technological University (GTU)</strong>, I excel in
-                crafting high-performance apps using Flutter, Node.js and Firebase.
+                <strong>Gujarat Technological University (GTU)</strong>, I build
+                production-grade backends using Python, FastAPI, and microservices
+                architecture.
               </p>
               <p>
-                My expertise encompasses{" "}
-                <strong>Java, C, Python</strong> and cloud services like{" "}
-                <strong>Azure and Google Cloud Platform</strong>, allowing me to
-                deliver scalable and secure solutions. Currently, I&apos;m building
-                cutting-edge fintech trading applications at{" "}
+                My expertise spans{" "}
+                <strong>RAG pipelines, LangChain, LLM integration</strong> and
+                multi-database environments with{" "}
+                <strong>PostgreSQL, MySQL, and MongoDB</strong>. Currently, I&apos;m
+                building fintech microservices, trading platforms, and AI-powered
+                financial applications at{" "}
                 <strong>Arhamshare</strong>.
               </p>
               <p>
-                Driven by a passion for innovation, I&apos;m committed to
-                developing user-centric mobile applications that address
-                real-world challenges. I thrive in the ever-evolving tech
-                landscape, continuously enhancing my skills to deliver impactful
-                results.
+                Driven by a passion for AI and backend engineering, I&apos;m
+                committed to building intelligent, scalable systems that solve
+                real-world problems — from real-time data pipelines to
+                GenAI-powered regulatory compliance tools.
               </p>
 
               <div className="about-highlights">
                 <div className="highlight-card">
-                  <div className="h-icon">📱</div>
-                  <h4>Mobile First</h4>
-                  <p>Cross-platform apps with native performance</p>
+                  <div className="h-icon">🐍</div>
+                  <h4>Python &amp; FastAPI</h4>
+                  <p>Microservices, REST APIs, async backends</p>
                 </div>
                 <div className="highlight-card">
-                  <div className="h-icon">🔥</div>
-                  <h4>Firebase Expert</h4>
-                  <p>Auth, Firestore, Cloud Functions, FCM</p>
+                  <div className="h-icon">🤖</div>
+                  <h4>GenAI &amp; RAG</h4>
+                  <p>LangChain, Qdrant, Groq LLaMA, embeddings</p>
                 </div>
                 <div className="highlight-card">
                   <div className="h-icon">☁️</div>
-                  <h4>Cloud Native</h4>
-                  <p>Azure &amp; GCP certified solutions</p>
+                  <h4>Cloud &amp; DevOps</h4>
+                  <p>Docker, NGINX, GCP, Azure, CI/CD</p>
                 </div>
                 <div className="highlight-card">
                   <div className="h-icon">👥</div>

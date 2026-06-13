@@ -1,6 +1,6 @@
 const TECH_ITEMS = [
-  "Flutter", "Firebase", "Dart", "Node.js", "Python",
-  "Java", "Azure", "GCP", "REST APIs", "MongoDB",
+  "Python", "FastAPI", "LangChain", "RAG Pipelines", "Qdrant",
+  "PostgreSQL", "Docker", "NGINX", "WebSockets", "MongoDB",
 ];
 
 export default function Marquee() {

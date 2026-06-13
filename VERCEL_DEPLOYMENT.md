@@ -139,13 +139,13 @@ Check Vercel logs → Function logs → See error messages
 
 ## ✨ Summary
 
-| Step | Time | Status |
-|------|------|--------|
-| 1. Sign in to Vercel | 1 min | ⏳ Do this |
-| 2. Import repository | 2 min | ⏳ Do this |
-| 3. Deploy | 1 click | ⏳ Do this |
-| 4. Wait for build | 2-3 min | ⌛ Auto |
-| 5. Visit your URL | 1 min | ✅ Done |
+| Step                 | Time    | Status    |
+| -------------------- | ------- | --------- |
+| 1. Sign in to Vercel | 1 min   | ⏳ Do this |
+| 2. Import repository | 2 min   | ⏳ Do this |
+| 3. Deploy            | 1 click | ⏳ Do this |
+| 4. Wait for build    | 2-3 min | ⌛ Auto    |
+| 5. Visit your URL    | 1 min   | ✅ Done    |
 
 **Total: ~10 minutes to live! 🚀**
 

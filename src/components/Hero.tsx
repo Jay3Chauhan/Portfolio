@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 
 const TYPING_PHRASES = [
-  "Building fintech apps at Arhamshare",
+  "Building fintech backends at Arhamshare",
+  "Python & FastAPI Engineer",
+  "RAG Pipelines & LLM Integration",
   "Former Google DSC Lead",
   "Microsoft Student Ambassador",
-  "Flutter & Firebase Expert",
-  "Open Source Contributor",
-  "Cloud Native Developer",
+  "Microservices & Cloud Native",
 ];
 
 function Particles() {
@@ -134,12 +134,12 @@ export default function Hero() {
         </div>
 
         <h1 className="hero-title">
-          <span className="line">Software</span>
+          <span className="line">Backend</span>
           <span className="line">
             <span className="accent">Engineer</span> &amp;
           </span>
           <span className="line">
-            <span className="outline">Flutter</span> Expert
+            <span className="outline">AI/ML</span> Developer
           </span>
         </h1>
 
@@ -151,9 +151,9 @@ export default function Hero() {
         </div>
 
         <p className="hero-desc">
-          I craft high-performance mobile applications with Flutter and Firebase.
+          I build production-grade backends and AI-powered systems with Python, FastAPI, and LangChain.
           Former Google DSC Lead and Microsoft Student Ambassador, currently
-          building fintech solutions at Arhamshare.
+          engineering fintech microservices and RAG pipelines at Arhamshare.
         </p>
 
         <div className="hero-actions">
@@ -189,12 +189,12 @@ export default function Hero() {
 
         <div className="hero-stats">
           <div className="stat-item">
-            <CountUp target={3} />
+            <CountUp target={2} suffix="+" />
             <div className="stat-label">Years Experience</div>
           </div>
           <div className="stat-item">
-            <CountUp target={10} />
-            <div className="stat-label">Projects Shipped</div>
+            <CountUp target={8} suffix="+" />
+            <div className="stat-label">Backend Services</div>
           </div>
           <div className="stat-item">
             <CountUp target={508} />

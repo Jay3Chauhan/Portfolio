@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Technical articles, tutorials, and case studies on Flutter, React, Cloud Architecture, and modern software development by Jay Chauhan.",
+    "Technical articles, tutorials, and case studies on Python, FastAPI, GenAI, RAG pipelines, and backend engineering by Jay Chauhan.",
   openGraph: {
     title: "Blog | Jay Chauhan",
     description:

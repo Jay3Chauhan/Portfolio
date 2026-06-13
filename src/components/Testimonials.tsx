@@ -8,7 +8,7 @@ const TESTIMONIALS = [
     name: "Tech Colleague",
     role: "Senior Developer, Arhamshare",
     quote:
-      "Jay is an exceptional developer who brings both technical excellence and creative problem-solving to every project. His Flutter skills are truly top-notch and he consistently delivers beyond expectations.",
+      "Jay is an exceptional backend engineer who brings both technical excellence and creative problem-solving to every project. His Python and FastAPI skills are outstanding — he consistently architects scalable systems that exceed expectations.",
   },
   {
     initials: "GM",
@@ -19,17 +19,17 @@ const TESTIMONIALS = [
   },
   {
     initials: "MI",
-    name: "Microsoft Intern",
+    name: "Microsoft Mentee",
     role: "Engage Program 2022",
     quote:
-      "Working with Jay on the Microsoft Engage project was a great experience. His ability to quickly grasp complex concepts like face recognition and translate them into working solutions is impressive.",
+      "Working with Jay on the Microsoft Engage project was a great experience. His ability to quickly grasp complex concepts like face recognition with OpenCV and translate them into working Python solutions is impressive.",
   },
   {
-    initials: "CL",
-    name: "Client",
-    role: "EventHub User",
+    initials: "TL",
+    name: "Team Lead",
+    role: "Arhamshare Engineering",
     quote:
-      "Jay's event management app solved a real problem in our local community. The UI is clean, the features are well-thought-out, and the payment integration works flawlessly. Highly recommended.",
+      "Jay's backend microservices architecture for our trading platform was instrumental. His work on WebSocket streams, Redis caching, and the Account Aggregator integration showed deep systems thinking.",
   },
 ];
 

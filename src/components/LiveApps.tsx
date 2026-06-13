@@ -13,7 +13,7 @@ const APPS = [
     icon: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/e7/ff/a2/e7ffa202-e2aa-6a39-2a69-7306078c45cd/Placeholder.mill/1024x1024bb.webp",
     playStore: "https://play.google.com/store/apps/details?id=com.wave.arhamtwo",
     appStore: "https://apps.apple.com/in/app/trado-by-arham/id6502446144",
-    tech: ["Flutter", "Firebase", "REST APIs"],
+    tech: ["FastAPI", "WebSockets", "Redis", "Docker"],
   },
   {
     name: "ArhamShare: MF",
@@ -24,7 +24,7 @@ const APPS = [
     icon: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/13/8e/43/138e4345-99ba-3eea-2089-33333b2f1a21/Placeholder.mill/1024x1024bb.webp",
     playStore: "https://play.google.com/store/apps/details?id=com.arhamshare.mf",
     appStore: "https://apps.apple.com/in/app/arhamshare-mf/id6759367829",
-    tech: ["Flutter", "Firebase", "Finvu SDK"],
+    tech: ["FastAPI", "PostgreSQL", "Finvu SDK"],
   },
   {
     name: "GrowMint",
@@ -35,7 +35,7 @@ const APPS = [
     icon: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/57/43/c3/5743c369-ad28-adc9-a7ed-96dd22f9d9c4/Placeholder.mill/1024x1024bb.webp",
     playStore: "",
     appStore: "https://apps.apple.com/in/app/growmint/id6759909170",
-    tech: ["Flutter", "Firebase", "MongoDB"],
+    tech: ["FastAPI", "MongoDB", "Account Aggregator"],
   },
 ];
 
@@ -67,17 +67,18 @@ export default function LiveApps() {
     <section id="live-apps">
       <div className="section-container">
         <ScrollReveal>
-          <div className="section-label">Live on Stores</div>
+          <div className="section-label">Live in Production</div>
         </ScrollReveal>
         <ScrollReveal>
           <h2 className="section-title">
-            Apps in Production
+            Backend Systems Powering Live Apps
           </h2>
         </ScrollReveal>
         <ScrollReveal>
           <p className="section-desc">
-            Applications I&apos;ve built that are currently live on the Google
-            Play Store and Apple App Store, serving real users every day.
+            Backend microservices and APIs I&apos;ve engineered that power
+            production apps on the Play Store and App Store, serving real
+            users every day.
           </p>
         </ScrollReveal>
 

@@ -7,9 +7,9 @@ export default function Footer() {
             <span className="dot" /> Jay Chauhan
           </div>
           <p>
-            Software Developer specializing in high-performance mobile
-            applications with Flutter and Firebase. Always building, always
-            learning.
+            Backend &amp; AI Engineer specializing in Python, FastAPI, and
+            GenAI systems. Building scalable fintech microservices and RAG
+            pipelines. Always building, always learning.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <p>
-          © 2025 <span>Jay Chauhan</span>. Crafted with passion and precision
+          © 2026 <span>Jay Chauhan</span>. Crafted with passion and precision
           from Surat, India.
         </p>
       </div>

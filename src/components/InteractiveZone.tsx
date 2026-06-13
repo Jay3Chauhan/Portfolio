@@ -65,8 +65,8 @@ const SHAPES = [
 ];
 
 const PILLS = [
-  { id: "pgP0", label: "Flutter Expert", style: { left: "8%", bottom: "25%" }, rotate: -15 },
-  { id: "pgP1", label: "Fintech Builder", style: { right: "5%", top: "50%" }, rotate: 12 },
+  { id: "pgP0", label: "Python & FastAPI", style: { left: "8%", bottom: "25%" }, rotate: -15 },
+  { id: "pgP1", label: "GenAI & RAG", style: { right: "5%", top: "50%" }, rotate: 12 },
   { id: "pgP2", label: "Open to Work", style: { left: "35%", bottom: "8%" }, rotate: -5 },
   { id: "pgP3", label: "View Projects", style: { right: "30%", top: "8%" }, rotate: 8 },
 ];
