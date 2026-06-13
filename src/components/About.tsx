@@ -69,7 +69,7 @@ export default function About() {
             <div className="about-image-container">
               <div className="about-image-frame">
                 <Image
-                  src="https://cdn.jsdelivr.net/gh/Jay3Chauhan/Portfolio@master/images/pic1.png"
+                  src="https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png"
                   alt="Jay Chauhan"
                   width={400}
                   height={480}

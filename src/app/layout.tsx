@@ -75,7 +75,7 @@ export const metadata: Metadata = {
       "Software Engineer specializing in Python, FastAPI, and AI — building fintech backends, RAG pipelines, and microservices at scale.",
     images: [
       {
-        url: "https://cdn.jsdelivr.net/gh/Jay3Chauhan/Portfolio@master/images/pic1.png",
+        url: "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png",
         width: 1200,
         height: 630,
         alt: "Jay Chauhan — Backend Engineer & AI Developer",
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     title: "Jay Chauhan | Backend Engineer & AI Developer",
     description:
       "Software Engineer specializing in Python, FastAPI, and AI — building fintech backends, RAG pipelines, and microservices at scale.",
-    images: ["https://cdn.jsdelivr.net/gh/Jay3Chauhan/Portfolio@master/images/pic1.png"],
+    images: ["https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png"],
     creator: "@Jay3_Chauhan",
   },
   alternates: {
@@ -107,7 +107,7 @@ const jsonLd = {
   "@type": "Person",
   name: "Jay Chauhan",
   url: "https://jaychauhan.tech/",
-  image: "https://cdn.jsdelivr.net/gh/Jay3Chauhan/Portfolio@master/images/pic1.png",
+  image: "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png",
   jobTitle: "Software Engineer",
   description:
     "Software Engineer specializing in Python, FastAPI, and AI — building fintech backends, RAG pipelines, and microservices at scale.",
