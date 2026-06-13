@@ -1,24 +1,65 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
+import {
+  absoluteUrl,
+  getBlogListJsonLd,
+  getBreadcrumbJsonLd,
+  getWebPageJsonLd,
+  siteConfig,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Blog",
   description:
     "Technical articles, tutorials, and case studies on Python, FastAPI, GenAI, RAG pipelines, and backend engineering by Jay Chauhan.",
+  alternates: {
+    canonical: absoluteUrl("/blog"),
+    types: {
+      "application/rss+xml": absoluteUrl("/feed.xml"),
+    },
+  },
   openGraph: {
     title: "Blog | Jay Chauhan",
     description:
       "Technical articles, tutorials, and case studies on modern software development.",
-    url: "https://jaychauhan.tech/blog",
+    url: absoluteUrl("/blog"),
+    type: "website",
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Jay Chauhan",
+    description:
+      "Technical articles, tutorials, and case studies on modern software development.",
+    images: [siteConfig.ogImage],
   },
 };
 
 export default function BlogPage() {
   const posts = getAllPosts();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      getWebPageJsonLd(
+        "/blog",
+        "Blog | Jay Chauhan",
+        "Technical articles on Python, FastAPI, GenAI, and backend engineering."
+      ),
+      getBreadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Blog", path: "/blog" },
+      ]),
+      ...(posts.length > 0 ? [getBlogListJsonLd(posts)] : []),
+    ],
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section style={{ paddingTop: "8rem" }}>
         <div className="section-container">
           <div className="section-label">Blog</div>

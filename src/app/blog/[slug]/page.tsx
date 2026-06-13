@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
+import {
+  absoluteUrl,
+  getBlogPostingJsonLd,
+  getBreadcrumbJsonLd,
+  getWebPageJsonLd,
+  siteConfig,
+} from "@/lib/seo";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 
@@ -22,20 +29,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.description,
+    keywords: post.tags,
+    authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
+    alternates: {
+      canonical: absoluteUrl(`/blog/${slug}`),
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
       publishedTime: post.date,
-      url: `https://jaychauhan.tech/blog/${slug}`,
+      modifiedTime: post.date,
+      authors: [siteConfig.author.name],
+      section: post.category,
+      tags: post.tags,
+      url: absoluteUrl(`/blog/${slug}`),
       images: post.coverImage
-        ? [{ url: post.coverImage, width: 1200, height: 630 }]
-        : undefined,
+        ? [{ url: post.coverImage, width: 1200, height: 630, alt: post.title }]
+        : [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      images: [post.coverImage ?? siteConfig.ogImage],
+      creator: siteConfig.twitterHandle,
     },
   };
 }
@@ -50,21 +68,15 @@ export default async function BlogPostPage({ params }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.date,
-    author: {
-      "@type": "Person",
-      name: "Jay Chauhan",
-      url: "https://jaychauhan.tech",
-    },
-    publisher: {
-      "@type": "Person",
-      name: "Jay Chauhan",
-    },
-    url: `https://jaychauhan.tech/blog/${slug}`,
-    keywords: post.tags,
+    "@graph": [
+      getWebPageJsonLd(`/blog/${slug}`, post.title, post.description),
+      getBlogPostingJsonLd(post),
+      getBreadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Blog", path: "/blog" },
+        { name: post.title, path: `/blog/${slug}` },
+      ]),
+    ],
   };
 
   return (

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Syne, DM_Sans, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
+import { getRootJsonLd, siteConfig } from "@/lib/seo";
 import "./globals.css";
 
 const syne = Syne({
@@ -27,33 +28,26 @@ export const viewport: Viewport = {
   themeColor: "#0a0a0a",
 };
 
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jaychauhan.tech"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Jay Chauhan | Backend Engineer & AI Developer | Python & FastAPI",
+    default: siteConfig.title,
     template: "%s | Jay Chauhan",
   },
-  description:
-    "Jay Chauhan is a Software Engineer specializing in Python, FastAPI, and AI/GenAI — building production-grade fintech backends, RAG pipelines, and microservices. Former Google DSC Lead and Microsoft Student Ambassador.",
-  keywords: [
-    "Jay Chauhan",
-    "Software Engineer",
-    "Backend Developer",
-    "Python Developer",
-    "FastAPI",
-    "LangChain",
-    "RAG",
-    "Generative AI",
-    "Microservices",
-    "Google DSC",
-    "Microsoft Student Ambassador",
-    "Arhamshare",
-    "Fintech",
-    "Portfolio",
-  ],
-  authors: [{ name: "Jay Chauhan", url: "https://jaychauhan.tech" }],
-  creator: "Jay Chauhan",
-  publisher: "Jay Chauhan",
+  description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  applicationName: siteConfig.shortName,
+  authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
+  creator: siteConfig.author.name,
+  publisher: siteConfig.author.name,
+  category: "technology",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   robots: {
     index: true,
     follow: true,
@@ -67,15 +61,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://jaychauhan.tech",
-    siteName: "Jay Chauhan — Portfolio",
-    title: "Jay Chauhan | Backend Engineer & AI Developer",
-    description:
-      "Software Engineer specializing in Python, FastAPI, and AI — building fintech backends, RAG pipelines, and microservices at scale.",
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
     images: [
       {
-        url: "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
         alt: "Jay Chauhan — Backend Engineer & AI Developer",
@@ -84,15 +77,21 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jay Chauhan | Backend Engineer & AI Developer",
-    description:
-      "Software Engineer specializing in Python, FastAPI, and AI — building fintech backends, RAG pipelines, and microservices at scale.",
-    images: ["https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png"],
-    creator: "@Jay3_Chauhan",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: siteConfig.twitterHandle,
+    site: siteConfig.twitterHandle,
   },
   alternates: {
-    canonical: "https://jaychauhan.tech",
+    canonical: siteConfig.url,
+    types: {
+      "application/rss+xml": `${siteConfig.url}/feed.xml`,
+    },
   },
+  ...(googleSiteVerification
+    ? { verification: { google: googleSiteVerification } }
+    : {}),
   icons: {
     icon: [
       { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -102,42 +101,7 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Jay Chauhan",
-  url: "https://jaychauhan.tech/",
-  image: "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png",
-  jobTitle: "Software Engineer",
-  description:
-    "Software Engineer specializing in Python, FastAPI, and AI — building fintech backends, RAG pipelines, and microservices at scale.",
-  sameAs: [
-    "https://www.linkedin.com/in/jay-chauhan-5a65921ba/",
-    "https://github.com/Jay3Chauhan",
-    "https://twitter.com/Jay3_Chauhan",
-    "https://instagram.com/Jay3_Chauhan",
-  ],
-  worksFor: {
-    "@type": "Organization",
-    name: "Arhamshare Pvt Ltd.",
-  },
-  alumniOf: {
-    "@type": "Organization",
-    name: "Gujarat Technological University",
-  },
-  knowsAbout: [
-    "Python",
-    "FastAPI",
-    "LangChain",
-    "RAG Pipelines",
-    "Generative AI",
-    "Microservices",
-    "PostgreSQL",
-    "Docker",
-    "Azure",
-    "Google Cloud",
-  ],
-};
+const jsonLd = getRootJsonLd();
 
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";

@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "jaychauhan.tech" }],
+      "destination": "https://www.jaychauhan.tech/:path*",
+      "permanent": true
+    }
+  ]
+}

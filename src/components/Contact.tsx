@@ -57,7 +57,7 @@ export default function Contact() {
                   <div className="contact-item-label">Website</div>
                   <div className="contact-item-value">
                     <a
-                      href="https://jaychauhan.tech"
+                      href="https://www.jaychauhan.tech"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
