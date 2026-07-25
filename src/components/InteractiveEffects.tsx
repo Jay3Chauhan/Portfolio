@@ -45,10 +45,22 @@ export default function InteractiveEffects() {
       }
     };
 
+    // Cursor-following spotlight glow on cards
+    const onSpotlightMove = (e: MouseEvent) => {
+      const card = closestEl(e, ".service-card,.project-card,.cert-card");
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const px = ((e.clientX - rect.left) / rect.width) * 100;
+      const py = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty("--spot-x", `${px}%`);
+      card.style.setProperty("--spot-y", `${py}%`);
+    };
+
     document.addEventListener("mousemove", onMagneticMove);
     document.addEventListener("mouseleave", onMagneticLeave, true);
     document.addEventListener("mousemove", onTiltMove);
     document.addEventListener("mouseleave", onTiltLeave, true);
+    document.addEventListener("mousemove", onSpotlightMove);
 
     // Smooth scroll for anchor links
     const onAnchorClick = (e: MouseEvent) => {
@@ -65,6 +77,7 @@ export default function InteractiveEffects() {
       document.removeEventListener("mouseleave", onMagneticLeave, true);
       document.removeEventListener("mousemove", onTiltMove);
       document.removeEventListener("mouseleave", onTiltLeave, true);
+      document.removeEventListener("mousemove", onSpotlightMove);
       document.removeEventListener("click", onAnchorClick);
     };
   }, []);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import HeroCanvas from "./HeroCanvas";
 
 const TYPING_PHRASES = [
   "Building fintech backends at Arhamshare",
@@ -126,6 +127,7 @@ export default function Hero() {
     <section className="hero" id="hero">
       <div className="hero-bg" />
       <div className="hero-grid-lines" />
+      <HeroCanvas />
       <Particles />
 
       <div className="hero-content" ref={heroContentRef}>

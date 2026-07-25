@@ -3064,3 +3064,92 @@ button:focus-visible {
   }
 }
 
+/* =============================================
+   ENHANCEMENTS — interactive depth & micro-motion
+   ============================================= */
+
+/* ── Interactive neural-network hero canvas ── */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  animation: heroCanvasIn 1.6s var(--ease-out-expo) 0.4s forwards;
+}
+@keyframes heroCanvasIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Cursor-following spotlight on cards ──
+   Reuses the shared glow pseudo-element but tracks the pointer
+   via --spot-x / --spot-y (set in InteractiveEffects). */
+.project-card::after,
+.service-card::after,
+.cert-card::after {
+  background: radial-gradient(
+    280px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(201, 243, 29, 0.16),
+    rgba(201, 243, 29, 0.04) 40%,
+    transparent 65%
+  );
+}
+
+/* ── Secondary button shine sweep (matches primary) ── */
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-secondary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 243, 29, 0.14),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s var(--ease-out-expo);
+  pointer-events: none;
+}
+.btn-secondary:hover::after {
+  transform: translateX(100%);
+}
+
+/* ── Hero accent underline glow pulse ── */
+.hero-title .accent::after {
+  animation: accentGlow 3.4s ease-in-out infinite;
+}
+@keyframes accentGlow {
+  0%,
+  100% {
+    opacity: 0.25;
+    box-shadow: 0 0 0 rgba(201, 243, 29, 0);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 18px rgba(201, 243, 29, 0.5);
+  }
+}
+
+/* ── Accessibility / performance: respect reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-canvas {
+    opacity: 1;
+  }
+}
+
