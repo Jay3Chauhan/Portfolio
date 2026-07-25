@@ -9,7 +9,10 @@ export default function Marquee() {
 
   return (
     <div className="marquee-section">
-      <div className="marquee-track">
+      <span className="sr-only">
+        Technologies I work with: {TECH_ITEMS.join(", ")}.
+      </span>
+      <div className="marquee-track" aria-hidden="true">
         {items.map((item, i) => (
           <span className="marquee-item" key={i}>
             {item} <span className="sep">◆</span>

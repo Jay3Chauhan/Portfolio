@@ -1,6 +1,9 @@
 "use client";
 
+import { Mail, MapPin, Phone, Globe } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+import ContactForm from "./ContactForm";
+import { siteConfig } from "@/lib/seo";
 
 export default function Contact() {
   return (
@@ -23,41 +26,49 @@ export default function Contact() {
           <ScrollReveal>
             <div className="contact-info">
               <div className="contact-item">
-                <div className="contact-icon">✉</div>
+                <div className="contact-icon">
+                  <Mail size={20} strokeWidth={2} aria-hidden="true" />
+                </div>
                 <div>
                   <div className="contact-item-label">Email</div>
                   <div className="contact-item-value">
-                    <a href="mailto:contact@jaychauhan.tech">
-                      contact@jaychauhan.tech
+                    <a href={`mailto:${siteConfig.email}`}>
+                      {siteConfig.email}
                     </a>
                   </div>
                 </div>
               </div>
               <div className="contact-item">
-                <div className="contact-icon">📍</div>
+                <div className="contact-icon">
+                  <MapPin size={20} strokeWidth={2} aria-hidden="true" />
+                </div>
                 <div>
                   <div className="contact-item-label">Location</div>
                   <div className="contact-item-value">
-                    Surat, Gujarat, India
+                    {siteConfig.location}
                   </div>
                 </div>
               </div>
               <div className="contact-item">
-                <div className="contact-icon">📞</div>
+                <div className="contact-icon">
+                  <Phone size={20} strokeWidth={2} aria-hidden="true" />
+                </div>
                 <div>
                   <div className="contact-item-label">Phone</div>
                   <div className="contact-item-value">
-                    <a href="tel:+919408254415">+91 9408254415</a>
+                    <a href={`tel:${siteConfig.phone}`}>+91 94082 54415</a>
                   </div>
                 </div>
               </div>
               <div className="contact-item">
-                <div className="contact-icon">🌐</div>
+                <div className="contact-icon">
+                  <Globe size={20} strokeWidth={2} aria-hidden="true" />
+                </div>
                 <div>
                   <div className="contact-item-label">Website</div>
                   <div className="contact-item-value">
                     <a
-                      href="https://www.jaychauhan.tech"
+                      href={siteConfig.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -80,24 +91,7 @@ export default function Contact() {
                 Whether you need a mobile app, want to collaborate, or just want
                 to say hello — I&apos;d love to hear from you.
               </p>
-              <a
-                href="mailto:contact@jaychauhan.tech"
-                className="btn-primary"
-                style={{ display: "inline-flex" }}
-              >
-                Send a Message{" "}
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  width="18"
-                  height="18"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
+              <ContactForm />
               <div className="social-links">
                 <a
                   href="https://www.linkedin.com/in/jay-chauhan-5a65921ba/"

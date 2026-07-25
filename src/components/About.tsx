@@ -1,7 +1,26 @@
 "use client";
 
 import Image from "next/image";
+import { Boxes, BrainCircuit, Cloud, Users } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+
+const HIGHLIGHTS = [
+  {
+    icon: Boxes,
+    title: "Python & FastAPI",
+    desc: "Microservices, REST APIs, async backends",
+  },
+  {
+    icon: BrainCircuit,
+    title: "GenAI & RAG",
+    desc: "LangChain, Qdrant, Groq LLaMA, embeddings",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    desc: "Docker, NGINX, GCP, Azure, CI/CD",
+  },
+];
 
 export default function About() {
   return (
@@ -41,25 +60,28 @@ export default function About() {
               </p>
 
               <div className="about-highlights">
-                <div className="highlight-card">
-                  <div className="h-icon">🐍</div>
-                  <h4>Python &amp; FastAPI</h4>
-                  <p>Microservices, REST APIs, async backends</p>
+                {HIGHLIGHTS.map((h) => (
+                  <div className="highlight-card" key={h.title}>
+                    <div className="h-icon">
+                      <h.icon size={20} strokeWidth={2} aria-hidden="true" />
+                    </div>
+                    <h4>{h.title}</h4>
+                    <p>{h.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="leadership-callout">
+                <div className="h-icon leadership-icon">
+                  <Users size={20} strokeWidth={2} aria-hidden="true" />
                 </div>
-                <div className="highlight-card">
-                  <div className="h-icon">🤖</div>
-                  <h4>GenAI &amp; RAG</h4>
-                  <p>LangChain, Qdrant, Groq LLaMA, embeddings</p>
-                </div>
-                <div className="highlight-card">
-                  <div className="h-icon">☁️</div>
-                  <h4>Cloud &amp; DevOps</h4>
-                  <p>Docker, NGINX, GCP, Azure, CI/CD</p>
-                </div>
-                <div className="highlight-card">
-                  <div className="h-icon">👥</div>
-                  <h4>Community Leader</h4>
-                  <p>508+ members as Google DSC Lead</p>
+                <div>
+                  <h4>Community Leadership</h4>
+                  <p>
+                    Grew Google Developer Student Club to <strong>508+ members</strong> (191.8%
+                    growth) as campus Lead — beyond the code, building teams and
+                    programs that scale.
+                  </p>
                 </div>
               </div>
             </div>

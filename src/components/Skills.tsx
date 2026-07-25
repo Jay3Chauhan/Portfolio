@@ -3,43 +3,55 @@
 import { useEffect, useRef } from "react";
 import ScrollReveal from "./ScrollReveal";
 
-const SKILL_CATEGORIES = [
+type Tier = "expert" | "proficient" | "familiar";
+
+const TIER_META: Record<Tier, { label: string; width: string }> = {
+  expert: { label: "Expert", width: "100%" },
+  proficient: { label: "Proficient", width: "68%" },
+  familiar: { label: "Familiar", width: "40%" },
+};
+
+// Tiers reflect hands-on production usage, not self-rated precision scores:
+// Expert = daily driver across multiple production systems
+// Proficient = regular use, shipped features independently
+// Familiar = working knowledge, used on select projects
+const SKILL_CATEGORIES: { title: string; skills: { name: string; tier: Tier }[] }[] = [
   {
     title: "Languages",
     skills: [
-      { name: "Python", level: 94 },
-      { name: "Java", level: 80 },
-      { name: "JavaScript / Node.js", level: 78 },
-      { name: "Dart", level: 75 },
+      { name: "Python", tier: "expert" },
+      { name: "Java", tier: "proficient" },
+      { name: "JavaScript / Node.js", tier: "familiar" },
+      { name: "Dart", tier: "familiar" },
     ],
   },
   {
     title: "Frameworks & Libraries",
     skills: [
-      { name: "FastAPI", level: 93 },
-      { name: "LangChain / LangGraph", level: 88 },
-      { name: "Selenium", level: 82 },
-      { name: "REST APIs / WebSockets", level: 90 },
-      { name: "Pydantic v2", level: 86 },
+      { name: "FastAPI", tier: "expert" },
+      { name: "LangChain / LangGraph", tier: "proficient" },
+      { name: "Selenium", tier: "proficient" },
+      { name: "REST APIs / WebSockets", tier: "expert" },
+      { name: "Pydantic v2", tier: "proficient" },
     ],
   },
   {
     title: "AI / ML",
     skills: [
-      { name: "RAG Pipelines", level: 88 },
-      { name: "Vector Embeddings (Qdrant)", level: 85 },
-      { name: "LLM Integration (Groq)", level: 84 },
-      { name: "RAGAS Evaluation", level: 78 },
+      { name: "RAG Pipelines", tier: "proficient" },
+      { name: "Vector Embeddings (Qdrant)", tier: "proficient" },
+      { name: "LLM Integration (Groq)", tier: "proficient" },
+      { name: "RAGAS Evaluation", tier: "familiar" },
     ],
   },
   {
     title: "Databases & DevOps",
     skills: [
-      { name: "PostgreSQL / MySQL", level: 90 },
-      { name: "MongoDB", level: 85 },
-      { name: "Docker / NGINX", level: 84 },
-      { name: "GCP / Azure", level: 80 },
-      { name: "GitHub Actions / CI/CD", level: 78 },
+      { name: "PostgreSQL / MySQL", tier: "expert" },
+      { name: "MongoDB", tier: "proficient" },
+      { name: "Docker / NGINX", tier: "proficient" },
+      { name: "GCP / Azure", tier: "proficient" },
+      { name: "GitHub Actions / CI/CD", tier: "familiar" },
     ],
   },
 ];
@@ -69,6 +81,13 @@ function SkillBars() {
 
   return (
     <div ref={ref}>
+      <div className="skill-tier-legend">
+        {(Object.keys(TIER_META) as Tier[]).map((tier) => (
+          <span key={tier} className={`skill-tier-legend-item tier-${tier}`}>
+            <span className="tier-dot" /> {TIER_META[tier].label}
+          </span>
+        ))}
+      </div>
       {SKILL_CATEGORIES.map((cat, i) => (
         <ScrollReveal key={i}>
           <div className="skill-category">
@@ -79,9 +98,14 @@ function SkillBars() {
               <div key={skill.name} className="skill-item">
                 <span className="skill-name">{skill.name}</span>
                 <div className="skill-bar-container">
-                  <div className="skill-bar" data-width={`${skill.level}%`} />
+                  <div
+                    className={`skill-bar tier-${skill.tier}`}
+                    data-width={TIER_META[skill.tier].width}
+                  />
                 </div>
-                <span className="skill-percent">{skill.level}%</span>
+                <span className={`skill-tier-label tier-${skill.tier}`}>
+                  {TIER_META[skill.tier].label}
+                </span>
               </div>
             ))}
           </div>

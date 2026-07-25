@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown, Lock, Sparkles } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 type Project = {
@@ -10,6 +11,8 @@ type Project = {
   category: string;
   type: string;
   github?: string;
+  /** Proprietary employer project — no public repo exists; show a badge instead of a dead link. */
+  private?: boolean;
   featured?: boolean;
   delay?: number;
 };
@@ -21,7 +24,7 @@ const PROJECTS: Project[] = [
     tech: ["Python", "LangChain", "Qdrant", "Groq LLaMA", "RAGAS"],
     category: "ai",
     type: "Featured Project",
-    github: "https://github.com/Jay3Chauhan",
+    private: true,
     featured: true,
   },
   {
@@ -30,7 +33,7 @@ const PROJECTS: Project[] = [
     tech: ["FastAPI", "WebSockets", "Redis", "Docker", "NGINX"],
     category: "backend",
     type: "Backend System",
-    github: "https://github.com/Jay3Chauhan",
+    private: true,
   },
   {
     title: "Mutual Fund Platform — Backend",
@@ -38,6 +41,7 @@ const PROJECTS: Project[] = [
     tech: ["FastAPI", "Selenium", "PostgreSQL", "MongoDB", "CronJobs"],
     category: "backend",
     type: "Backend System",
+    private: true,
     delay: 1,
   },
   {
@@ -46,8 +50,14 @@ const PROJECTS: Project[] = [
     tech: ["FastAPI", "Finvu SDK", "JWT/OAuth", "ReBIT API"],
     category: "backend",
     type: "Backend System",
+    private: true,
     delay: 2,
   },
+];
+
+/** Early learning projects — kept for transparency, visually de-emphasized so they
+ *  don't sit at equal weight to production fintech systems above. */
+const EARLY_PROJECTS: Project[] = [
   {
     title: "FaceTrack — Recognition System",
     desc: "Django app using OpenCV for automatic face detection and attendance marking. Multi-face support with 7% speed improvement. Built during Microsoft Engage 2022.",
@@ -63,7 +73,6 @@ const PROJECTS: Project[] = [
     category: "python",
     type: "Python Tool",
     github: "https://github.com/Jay3Chauhan/Instagram-Downloader.git",
-    delay: 1,
   },
   {
     title: "YouTube Downloader",
@@ -72,7 +81,6 @@ const PROJECTS: Project[] = [
     category: "python",
     type: "Python Tool",
     github: "https://github.com/Jay3Chauhan/YoutubeDownloader.git",
-    delay: 2,
   },
   {
     title: "E-Commerce + FAQ Bot",
@@ -91,13 +99,42 @@ const FILTERS = [
   { label: "Python Tools", value: "python" },
 ];
 
+function ProjectLinks({ project }: { project: Project }) {
+  if (project.private) {
+    return (
+      <span className="project-private-badge" title="Proprietary employer project — no public repository">
+        <Lock size={12} strokeWidth={2.5} aria-hidden="true" /> Private
+      </span>
+    );
+  }
+  if (project.github) {
+    return (
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`GitHub - ${project.title}`}
+      >
+        ⟨/⟩
+      </a>
+    );
+  }
+  return null;
+}
+
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState("all");
+  const [showEarly, setShowEarly] = useState(false);
 
   const filtered =
     activeFilter === "all"
       ? PROJECTS
       : PROJECTS.filter((p) => p.category === activeFilter);
+
+  const filteredEarly =
+    activeFilter === "all"
+      ? EARLY_PROJECTS
+      : EARLY_PROJECTS.filter((p) => p.category === activeFilter);
 
   return (
     <section id="projects">
@@ -135,7 +172,7 @@ export default function Projects() {
               <ScrollReveal key={i}>
                 <div className="featured-project" data-cat={project.category}>
                   <div className="featured-project-visual">
-                    <span className="fp-icon">🎪</span>
+                    <Sparkles size={72} strokeWidth={1.25} className="fp-icon" aria-hidden="true" />
                   </div>
                   <div className="featured-project-content">
                     <div className="featured-badge">★ {project.type}</div>
@@ -146,15 +183,21 @@ export default function Projects() {
                         <span key={t} className="tech-tag">{t}</span>
                       ))}
                     </div>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary"
-                      style={{ width: "fit-content", padding: "0.7rem 1.5rem", fontSize: "0.82rem" }}
-                    >
-                      View on GitHub →
-                    </a>
+                    {project.private ? (
+                      <span className="project-private-badge featured-private-badge">
+                        <Lock size={13} strokeWidth={2.5} aria-hidden="true" /> Private — employer/personal codebase not public
+                      </span>
+                    ) : (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-secondary"
+                        style={{ width: "fit-content", padding: "0.7rem 1.5rem", fontSize: "0.82rem" }}
+                      >
+                        View on GitHub →
+                      </a>
+                    )}
                   </div>
                 </div>
               </ScrollReveal>
@@ -164,16 +207,7 @@ export default function Projects() {
                   <div className="project-card-header">
                     <span className="project-type">{project.type}</span>
                     <div className="project-links">
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`GitHub - ${project.title}`}
-                        >
-                          ⟨/⟩
-                        </a>
-                      )}
+                      <ProjectLinks project={project} />
                     </div>
                   </div>
                   <div className="project-card-body">
@@ -190,6 +224,52 @@ export default function Projects() {
             )
           )}
         </div>
+
+        {filteredEarly.length > 0 && (
+          <div className="early-projects">
+            <button
+              className="early-projects-toggle"
+              onClick={() => setShowEarly((v) => !v)}
+              aria-expanded={showEarly}
+              aria-controls="earlyProjectsGrid"
+            >
+              <ChevronDown
+                size={16}
+                strokeWidth={2.5}
+                className={`early-projects-chevron ${showEarly ? "open" : ""}`}
+                aria-hidden="true"
+              />
+              {showEarly ? "Hide" : "Show"} Early Projects &amp; Learning Archive
+              <span className="early-projects-count">{filteredEarly.length}</span>
+            </button>
+
+            {showEarly && (
+              <div className="projects-grid early-projects-grid" id="earlyProjectsGrid">
+                {filteredEarly.map((project, i) => (
+                  <ScrollReveal key={i}>
+                    <div className="project-card project-card-early" data-cat={project.category}>
+                      <div className="project-card-header">
+                        <span className="project-type">{project.type}</span>
+                        <div className="project-links">
+                          <ProjectLinks project={project} />
+                        </div>
+                      </div>
+                      <div className="project-card-body">
+                        <h3>{project.title}</h3>
+                        <p>{project.desc}</p>
+                      </div>
+                      <div className="project-card-footer">
+                        {project.tech.map((t) => (
+                          <span key={t} className="tech-tag">{t}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
         <ScrollReveal>
           <div style={{ textAlign: "center", marginTop: "3rem" }}>

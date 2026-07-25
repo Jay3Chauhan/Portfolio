@@ -30,8 +30,8 @@ export default function Home() {
         <Skills />
         <Certifications />
         <Testimonials />
-        <InteractiveZone />
         <Contact />
+        <InteractiveZone />
       </main>
       <InteractiveEffects />
     </>

@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import HeroCanvas from "./HeroCanvas";
+import { siteConfig } from "@/lib/seo";
+import { CERTIFICATIONS_COUNT } from "./Certifications";
 
 const TYPING_PHRASES = [
   "Building fintech backends at Arhamshare",
@@ -66,9 +68,14 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   }, [target]);
 
   return (
-    <div ref={ref} className="stat-number" data-count={target}>
-      {count}{suffix}
-    </div>
+    <>
+      {/* Real final value in the DOM for crawlers/screen readers/no-JS,
+          independent of the animated counter below. */}
+      <span className="sr-only">{target}{suffix}</span>
+      <div ref={ref} className="stat-number" aria-hidden="true">
+        {count}{suffix}
+      </div>
+    </>
   );
 }
 
@@ -132,7 +139,7 @@ export default function Hero() {
 
       <div className="hero-content" ref={heroContentRef}>
         <div className="hero-badge">
-          <span className="pulse" /> Available for opportunities
+          <span className="pulse" /> Open to Backend &amp; AI/ML roles · Remote or Gujarat, India
         </div>
 
         <h1 className="hero-title">
@@ -175,7 +182,7 @@ export default function Hero() {
             </span>
           </a>
           <a
-            href="https://drive.google.com/file/d/1EddxDs0TL6hxAp9qMkkvwT8korQZP9wa/view"
+            href={siteConfig.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-magnetic"
@@ -203,7 +210,7 @@ export default function Hero() {
             <div className="stat-label">Community Members</div>
           </div>
           <div className="stat-item">
-            <CountUp target={6} />
+            <CountUp target={CERTIFICATIONS_COUNT} />
             <div className="stat-label">Certifications</div>
           </div>
         </div>

@@ -12,6 +12,13 @@ export const siteConfig = {
     "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png",
   twitterHandle: "@Jay3_Chauhan",
   email: "contact@jaychauhan.tech",
+  phone: "+919408254415",
+  location: "Surat, Gujarat, India",
+  // TODO: Move resume to /public (e.g. "/jay-chauhan-resume.pdf") once a
+  // current PDF is available, so it's served from this domain instead of
+  // Google Drive (faster, no permission errors, better for SEO).
+  resumeUrl:
+    "https://drive.google.com/file/d/1EddxDs0TL6hxAp9qMkkvwT8korQZP9wa/view",
   author: {
     name: "Jay Chauhan",
     jobTitle: "Software Engineer",

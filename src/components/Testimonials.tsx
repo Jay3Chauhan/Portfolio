@@ -2,38 +2,30 @@
 
 import ScrollReveal from "./ScrollReveal";
 
-const TESTIMONIALS = [
-  {
-    initials: "TC",
-    name: "Tech Colleague",
-    role: "Senior Developer, Arhamshare",
-    quote:
-      "Jay is an exceptional backend engineer who brings both technical excellence and creative problem-solving to every project. His Python and FastAPI skills are outstanding — he consistently architects scalable systems that exceed expectations.",
-  },
-  {
-    initials: "GM",
-    name: "GDSC Member",
-    role: "Core Team, GDSC GTU",
-    quote:
-      "As GDSC Lead, Jay demonstrated remarkable leadership and organizational skills. He grew our community from scratch to 500+ members and created an inclusive, learning-focused environment for all.",
-  },
-  {
-    initials: "MI",
-    name: "Microsoft Mentee",
-    role: "Engage Program 2022",
-    quote:
-      "Working with Jay on the Microsoft Engage project was a great experience. His ability to quickly grasp complex concepts like face recognition with OpenCV and translate them into working Python solutions is impressive.",
-  },
-  {
-    initials: "TL",
-    name: "Team Lead",
-    role: "Arhamshare Engineering",
-    quote:
-      "Jay's backend microservices architecture for our trading platform was instrumental. His work on WebSocket streams, Redis caching, and the Account Aggregator integration showed deep systems thinking.",
-  },
-];
+type Testimonial = {
+  name: string;
+  role: string;
+  quote: string;
+  /** Real LinkedIn recommendation URL or profile link, if available. */
+  linkedinUrl?: string;
+  avatar?: string;
+  /** Must be true (real name + real role, ideally a LinkedIn link) to render.
+   *  This gate exists because unverified/initials-only testimonials read as
+   *  fabricated to skeptical readers and hurt credibility more than having
+   *  none at all — see the July 2026 site audit. */
+  verified: boolean;
+};
+
+// To re-enable this section: add real testimonials below with `verified: true`,
+// ideally sourced from actual LinkedIn Recommendations (Settings & Privacy →
+// Data privacy → Get a copy of your data, or ask connections to leave one).
+// Until then this array stays empty and the section renders nothing.
+const TESTIMONIALS: Testimonial[] = [];
 
 export default function Testimonials() {
+  const verified = TESTIMONIALS.filter((t) => t.verified);
+  if (verified.length === 0) return null;
+
   return (
     <section id="testimonials">
       <div className="section-container">
@@ -51,14 +43,29 @@ export default function Testimonials() {
         </ScrollReveal>
 
         <div className="testimonials-track" id="testimonialsTrack">
-          {TESTIMONIALS.map((t, i) => (
+          {verified.map((t, i) => (
             <div key={i} className="testimonial-card">
               <div className="quote-mark">&ldquo;</div>
               <blockquote>{t.quote}</blockquote>
               <div className="testimonial-author">
-                <div className="testimonial-avatar">{t.initials}</div>
+                <div className="testimonial-avatar">
+                  {t.name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")
+                    .slice(0, 2)
+                    .toUpperCase()}
+                </div>
                 <div className="testimonial-author-info">
-                  <div className="ta-name">{t.name}</div>
+                  <div className="ta-name">
+                    {t.linkedinUrl ? (
+                      <a href={t.linkedinUrl} target="_blank" rel="noopener noreferrer">
+                        {t.name}
+                      </a>
+                    ) : (
+                      t.name
+                    )}
+                  </div>
                   <div className="ta-role">{t.role}</div>
                 </div>
               </div>
