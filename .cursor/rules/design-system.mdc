@@ -1,0 +1,43 @@
+---
+description: Editorial design system — colour tokens, type scale and custom utilities
+globs: src/**/*.{tsx,css}
+alwaysApply: false
+---
+
+# Design System
+
+All tokens are defined once in `src/app/globals.css`. Light is canonical; `.dark`
+overrides the same variable names, and `@theme inline` maps them to Tailwind.
+
+## Never hardcode a colour
+
+```tsx
+// ❌ BAD — breaks dark mode, invisible to the token system
+<div className="bg-[#edeae2] text-[#16171a] border-[#d6d1c6]">
+
+// ✅ GOOD
+<div className="bg-paper text-ink border-line">
+```
+
+Semantic tokens: `paper`, `paper-raised`, `paper-sunk`, `ink`, `mist`, `whisper`,
+`line`, `line-strong`, `pine` (accent), `ember` (errors only).
+
+Adding a colour means adding it in three places — `:root`, `.dark`, and
+`@theme inline`. A token that only exists in one theme is a bug.
+
+## Type
+
+- `font-display` (Newsreader serif) for headings and pull quotes, always `font-light`.
+- `font-sans` (Archivo) for body copy.
+- `label` / `label-sm` utilities for every micro-caption: mono, uppercase, wide tracking.
+  Use the utility, don't re-declare `text-xs uppercase tracking-widest`.
+- `wordmark` utility for the extended-grotesk name treatment (uses Archivo's width axis).
+
+Display sizes come from the `@theme` scale: `text-mega`, `text-display`, `text-title`,
+`text-lead`. Reach for those before writing an arbitrary `text-[...]` clamp.
+
+## Layout rhythm
+
+- `gutter` for horizontal page padding, `pt-section` for vertical section spacing.
+- `rule-t` / `rule-b` for hairlines; `RuleLine` when it should draw itself in on scroll.
+- Every top-level section opens with `<SectionHeader index="0X" kicker="..." />`.

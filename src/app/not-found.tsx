@@ -1,53 +1,42 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { RiseText } from "@/components/primitives/rise-text";
 
 export const metadata: Metadata = {
-  title: "Page Not Found",
+  title: "Page not found",
   description: "The page you are looking for does not exist.",
-  robots: {
-    index: false,
-    follow: true,
-  },
+  robots: { index: false, follow: true },
 };
 
 export default function NotFound() {
   return (
-    <section
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        gap: "1.5rem",
-        textAlign: "center",
-        padding: "2rem",
-      }}
-    >
-      <h1
-        style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "clamp(4rem, 10vw, 8rem)",
-          fontWeight: 800,
-          color: "var(--accent)",
-          letterSpacing: "-0.04em",
-          lineHeight: 1,
-        }}
-      >
-        404
-      </h1>
-      <p
-        style={{
-          fontSize: "1.2rem",
-          color: "var(--text-secondary)",
-          maxWidth: "400px",
-        }}
-      >
-        Oops! The page you&apos;re looking for doesn&apos;t exist or has been moved.
+    <section className="gutter flex min-h-[80svh] flex-col justify-center pt-[var(--nav-h)]">
+      <p className="label text-whisper">Error 404</p>
+
+      <RiseText
+        as="h1"
+        text="This route was never deployed."
+        className="font-display text-display mt-8 block max-w-[14ch] font-light"
+      />
+
+      <p className="text-mist mt-8 max-w-[42ch] text-lg font-light">
+        The page you asked for does not exist, or it moved somewhere more sensible.
       </p>
-      <Link href="/" className="btn-primary" style={{ marginTop: "1rem" }}>
-        Back to Home
-      </Link>
+
+      <div className="mt-12 flex flex-wrap gap-4">
+        <Link
+          href="/"
+          className="label border-ink text-ink hover:bg-ink hover:text-paper rounded-full border px-6 py-3.5 transition-colors duration-400"
+        >
+          Back home
+        </Link>
+        <Link
+          href="/blog"
+          className="label border-line text-mist hover:text-ink rounded-full border px-6 py-3.5 transition-colors duration-400"
+        >
+          Read something instead
+        </Link>
+      </div>
     </section>
   );
 }

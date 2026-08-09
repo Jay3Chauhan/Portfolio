@@ -4,12 +4,10 @@ export const siteConfig = {
   url: "https://www.jaychauhan.tech",
   locale: "en_US",
   language: "en-US",
-  title:
-    "Jay Chauhan | Backend Engineer & AI Developer | Python & FastAPI",
+  title: "Jay Chauhan | Backend Engineer & AI Developer | Python & FastAPI",
   description:
     "Jay Chauhan is a Software Engineer specializing in Python, FastAPI, and AI/GenAI — building production-grade fintech backends, RAG pipelines, and microservices. Former Google DSC Lead and Microsoft Student Ambassador.",
-  ogImage:
-    "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png",
+  ogImage: "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png",
   twitterHandle: "@Jay3_Chauhan",
   email: "contact@jaychauhan.tech",
   phone: "+919408254415",
@@ -17,13 +15,11 @@ export const siteConfig = {
   // TODO: Move resume to /public (e.g. "/jay-chauhan-resume.pdf") once a
   // current PDF is available, so it's served from this domain instead of
   // Google Drive (faster, no permission errors, better for SEO).
-  resumeUrl:
-    "https://drive.google.com/file/d/1EddxDs0TL6hxAp9qMkkvwT8korQZP9wa/view",
+  resumeUrl: "https://drive.google.com/file/d/1EddxDs0TL6hxAp9qMkkvwT8korQZP9wa/view",
   author: {
     name: "Jay Chauhan",
     jobTitle: "Software Engineer",
-    image:
-      "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png",
+    image: "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png",
     sameAs: [
       "https://www.linkedin.com/in/jay-chauhan-5a65921ba/",
       "https://github.com/Jay3Chauhan",
@@ -145,9 +141,7 @@ export function getBlogPostingJsonLd(post: {
   };
 }
 
-export function getBreadcrumbJsonLd(
-  items: Array<{ name: string; path: string }>
-) {
+export function getBreadcrumbJsonLd(items: Array<{ name: string; path: string }>) {
   return {
     "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
@@ -160,7 +154,7 @@ export function getBreadcrumbJsonLd(
 }
 
 export function getBlogListJsonLd(
-  posts: Array<{ slug: string; title: string; description: string }>
+  posts: Array<{ slug: string; title: string; description: string }>,
 ) {
   return {
     "@type": "ItemList",

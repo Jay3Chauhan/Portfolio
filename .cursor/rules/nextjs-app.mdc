@@ -1,0 +1,47 @@
+---
+description: Next.js 16 App Router conventions, rendering and SEO for this project
+globs: src/app/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# App Router
+
+Every route here is static. Keep it that way — nothing on this site needs a request.
+
+## Server by default
+
+`layout.tsx` and `page.tsx` are Server Components. Push `"use client"` down to the
+leaf that actually needs a hook. Marking a page as a client component to satisfy one
+child drags the whole module graph into the browser bundle.
+
+`next/dynamic` with `ssr: false` is a build error inside a Server Component. Wrap it:
+
+```tsx
+// components/heavy-loader.tsx
+"use client";
+import dynamic from "next/dynamic";
+
+export const Heavy = dynamic(() => import("./heavy"), {
+  ssr: false,
+  loading: () => <div className="h-screen" />, // reserve the box → no CLS
+});
+```
+
+## Next 16 specifics
+
+- `priority` on `next/image` is deprecated → use `preload`.
+- `experimental.ppr` is gone; this site doesn't need `cacheComponents`.
+- `next lint` was removed — lint through the ESLint CLI (`npm run lint`).
+- `params` and `searchParams` are Promises and must be awaited.
+
+## Images
+
+`width`/`height` or `fill` are required, and `sizes` is mandatory with `fill` —
+without it the browser assumes `100vw` and downloads the largest candidate. Remote
+hosts must be listed in `next.config.js` `images.remotePatterns`.
+
+## SEO
+
+All metadata helpers live in `src/lib/seo.ts`. Every route exports `metadata` with a
+canonical URL, and content routes emit a JSON-LD `@graph` combining `WebPage`,
+`BreadcrumbList` and the page-specific type. Update `sitemap.ts` when adding a route.

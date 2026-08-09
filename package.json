@@ -6,26 +6,31 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{ts,tsx,css,md,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,css,md,json}\""
   },
   "dependencies": {
-    "next": "^15.1.0",
+    "gray-matter": "^4.0.3",
+    "lenis": "^1.3.26",
+    "motion": "^13.0.0",
+    "next": "^16.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "lucide-react": "^0.468.0",
-    "gray-matter": "^4.0.3",
-    "next-mdx-remote": "^6.0.0",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "typescript": "^5.7.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^15.1.0",
+    "eslint-config-next": "^16.3.0",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.0.0",
-    "@tailwindcss/postcss": "^4.0.0"
+    "typescript": "^5.7.0"
   }
 }

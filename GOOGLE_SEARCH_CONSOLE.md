@@ -15,16 +15,16 @@ Complete guide to verify, configure, and optimize **jaychauhan.tech** in Google 
 
 Your Next.js app already ships with SEO foundations:
 
-| Feature | URL / location |
-| --- | --- |
-| XML sitemap | `/sitemap.xml` |
-| Robots.txt | `/robots.txt` |
-| RSS feed (blog) | `/feed.xml` |
-| Open Graph + Twitter cards | All pages |
-| Canonical URLs | Home, blog, and blog posts |
-| JSON-LD structured data | Person, WebSite, WebPage, BlogPosting, Breadcrumbs |
-| Google Analytics | `G-1QEB2QFT9X` |
-| Google Search Console verification | Via `GOOGLE_SITE_VERIFICATION` env var |
+| Feature                            | URL / location                                     |
+| ---------------------------------- | -------------------------------------------------- |
+| XML sitemap                        | `/sitemap.xml`                                     |
+| Robots.txt                         | `/robots.txt`                                      |
+| RSS feed (blog)                    | `/feed.xml`                                        |
+| Open Graph + Twitter cards         | All pages                                          |
+| Canonical URLs                     | Home, blog, and blog posts                         |
+| JSON-LD structured data            | Person, WebSite, WebPage, BlogPosting, Breadcrumbs |
+| Google Analytics                   | `G-1QEB2QFT9X`                                     |
+| Google Search Console verification | Via `GOOGLE_SITE_VERIFICATION` env var             |
 
 ---
 
@@ -129,11 +129,11 @@ Sitemaps help discovery; manual indexing requests speed up the first crawl.
 1. Use the **URL Inspection** bar at the top of Search Console.
 2. Inspect each URL and click **Request indexing**:
 
-| Priority | URL |
-| --- | --- |
-| 1 | `https://www.jaychauhan.tech/` |
-| 2 | `https://www.jaychauhan.tech/blog` |
-| 3 | Each blog post URL |
+| Priority | URL                                |
+| -------- | ---------------------------------- |
+| 1        | `https://www.jaychauhan.tech/`     |
+| 2        | `https://www.jaychauhan.tech/blog` |
+| 3        | Each blog post URL                 |
 
 **Limit:** Google allows a small number of manual requests per day. Use them on your most important pages first.
 
@@ -193,9 +193,9 @@ Check these reports every 7–14 days:
 
 - **Indexed** — pages Google shows in search
 - **Not indexed** — review reasons:
-  - *Crawled – currently not indexed* → usually thin or duplicate content; add more unique value
-  - *Discovered – currently not indexed* → request indexing or improve internal links
-  - *Excluded by noindex* → expected for 404 pages
+  - _Crawled – currently not indexed_ → usually thin or duplicate content; add more unique value
+  - _Discovered – currently not indexed_ → request indexing or improve internal links
+  - _Excluded by noindex_ → expected for 404 pages
 
 ### Links
 
@@ -262,6 +262,7 @@ Use this before and after every major deploy:
 **Cause:** Vercel serves `https://www.jaychauhan.tech` but canonical URLs pointed to non-www. Google sees: crawl non-www → redirect to www → canonical says non-www → **Redirect error**.
 
 **Fix (already in code):**
+
 1. Canonical, sitemap, and robots use `https://www.jaychauhan.tech`.
 2. Deploy the latest build to Vercel.
 3. In Search Console, add property `https://www.jaychauhan.tech` (not non-www).
@@ -299,13 +300,13 @@ Test with [Rich Results Test](https://search.google.com/test/rich-results):
 
 ## Useful tools
 
-| Tool | Purpose |
-| --- | --- |
-| [Google Search Console](https://search.google.com/search-console) | Indexing, queries, sitemaps |
-| [Rich Results Test](https://search.google.com/test/rich-results) | Structured data validation |
-| [PageSpeed Insights](https://pagespeed.web.dev/) | Core Web Vitals |
-| [Google Analytics](https://analytics.google.com/) | Traffic and behavior |
-| [Bing Webmaster Tools](https://www.bing.com/webmasters) | Extra search engine coverage (optional) |
+| Tool                                                              | Purpose                                 |
+| ----------------------------------------------------------------- | --------------------------------------- |
+| [Google Search Console](https://search.google.com/search-console) | Indexing, queries, sitemaps             |
+| [Rich Results Test](https://search.google.com/test/rich-results)  | Structured data validation              |
+| [PageSpeed Insights](https://pagespeed.web.dev/)                  | Core Web Vitals                         |
+| [Google Analytics](https://analytics.google.com/)                 | Traffic and behavior                    |
+| [Bing Webmaster Tools](https://www.bing.com/webmasters)           | Extra search engine coverage (optional) |
 
 ---
 
@@ -321,15 +322,15 @@ To finish setup, please provide or complete:
 
 ## File reference (codebase)
 
-| File | Purpose |
-| --- | --- |
-| `src/lib/seo.ts` | Central SEO config and JSON-LD helpers |
-| `src/app/layout.tsx` | Global metadata + GSC verification |
-| `src/app/sitemap.ts` | XML sitemap generation |
-| `src/app/robots.ts` | Crawler rules |
-| `src/app/feed.xml/route.ts` | Blog RSS feed |
-| `.env.example` | Verification env var template |
+| File                        | Purpose                                |
+| --------------------------- | -------------------------------------- |
+| `src/lib/seo.ts`            | Central SEO config and JSON-LD helpers |
+| `src/app/layout.tsx`        | Global metadata + GSC verification     |
+| `src/app/sitemap.ts`        | XML sitemap generation                 |
+| `src/app/robots.ts`         | Crawler rules                          |
+| `src/app/feed.xml/route.ts` | Blog RSS feed                          |
+| `.env.example`              | Verification env var template          |
 
 ---
 
-*Last updated: June 2026*
+_Last updated: June 2026_

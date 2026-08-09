@@ -86,6 +86,7 @@ jobs:
 ## Step 5: Monitoring
 
 Set up CloudWatch alarms for:
+
 - **Response time** > 3 seconds
 - **Error rate** > 1%
 - **CPU utilization** > 80%
@@ -95,13 +96,13 @@ Set up CloudWatch alarms for:
 
 For a typical portfolio/blog with moderate traffic:
 
-| Service | Monthly Cost |
-|---------|-------------|
-| ECS Fargate | ~$15 |
-| CloudFront | ~$5 |
-| Route 53 | ~$1 |
-| CloudWatch | ~$3 |
-| **Total** | **~$24/month** |
+| Service     | Monthly Cost   |
+| ----------- | -------------- |
+| ECS Fargate | ~$15           |
+| CloudFront  | ~$5            |
+| Route 53    | ~$1            |
+| CloudWatch  | ~$3            |
+| **Total**   | **~$24/month** |
 
 This is comparable to Vercel's Pro plan but with significantly more control and scalability options.
 

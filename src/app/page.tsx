@@ -1,39 +1,29 @@
-import Preloader from "@/components/Preloader";
-import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
-import About from "@/components/About";
-import Services from "@/components/Services";
-import Terminal from "@/components/Terminal";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
-import LiveApps from "@/components/LiveApps";
-import Skills from "@/components/Skills";
-import Certifications from "@/components/Certifications";
-import Testimonials from "@/components/Testimonials";
-import InteractiveZone from "@/components/InteractiveZone";
-import Contact from "@/components/Contact";
-import InteractiveEffects from "@/components/InteractiveEffects";
+import { SectionRail } from "@/components/chrome/section-rail";
+import { Hero } from "@/components/sections/hero";
+import { Premise } from "@/components/sections/premise";
+import { Work } from "@/components/sections/work";
+import { Stack } from "@/components/sections/stack";
+import { Approach } from "@/components/sections/approach";
+import { Story } from "@/components/sections/story";
+import { Signals } from "@/components/sections/signals";
+import { Production } from "@/components/sections/production";
+import { Writing } from "@/components/sections/writing";
+import { Contact } from "@/components/sections/contact";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      <Preloader />
-      <main>
-        <Hero />
-        <Marquee />
-        <About />
-        <Services />
-        <Terminal />
-        <Experience />
-        <Projects />
-        <LiveApps />
-        <Skills />
-        <Certifications />
-        <Testimonials />
-        <Contact />
-        <InteractiveZone />
-      </main>
-      <InteractiveEffects />
+      <SectionRail />
+      <Hero />
+      <Premise />
+      <Work />
+      <Stack />
+      <Approach />
+      <Story />
+      <Signals />
+      <Production />
+      <Writing />
+      <Contact />
     </>
   );
 }

@@ -42,6 +42,10 @@ Thumbs.db
 *.pem
 old_portfolio_index.html
 index.html
+*.tsbuildinfo
+
+# Local design review screenshots
+.shots/
 
 # Vercel
 .vercel

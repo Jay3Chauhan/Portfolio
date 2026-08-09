@@ -1,0 +1,47 @@
+---
+description: Where portfolio copy and data live, and the accuracy bar for it
+globs: src/content/**/*.ts
+alwaysApply: false
+---
+
+# Content Layer
+
+`src/content/` is the only place portfolio copy lives. Components read from it;
+they never contain a project name, metric, date or paragraph inline.
+
+| Module          | Owns                                                  |
+| --------------- | ----------------------------------------------------- |
+| `site.ts`       | Identity, contact, socials, nav, headline figures     |
+| `work.ts`       | Flagship projects + the public `archive`              |
+| `stack.ts`      | The four disciplines behind the section 03 explorer   |
+| `story.ts`      | Timeline chapters and which schematic plate each uses |
+| `signals.ts`    | Proof claims and the credential ledger                |
+| `production.ts` | Shipped apps and the pipeline strip                   |
+
+## Accuracy bar
+
+Every number is a real number. No invented metrics, clients, testimonials or dates.
+If a figure can't be sourced to actual work, it doesn't ship. When a claim is
+approximate, say so in the copy (`1k–10k`, `20+`) rather than inventing precision.
+
+## Adding a field
+
+Extend the exported type first, then fill every existing record. Optional fields
+should be genuinely optional in the UI:
+
+```ts
+export type WorkItem = {
+  // ...
+  href?: string;                       // private work has no public link
+  visibility: "private" | "public";
+};
+```
+
+```tsx
+{item.href
+  ? <a href={item.href}>View ↗</a>
+  : <span className="label text-whisper">Private repository</span>}
+```
+
+Blog posts are Markdown in `content/blog/` with `title`, `description`, `date`,
+`category`, `tags` and `readTime` frontmatter — parsed by `src/lib/blog.ts`.

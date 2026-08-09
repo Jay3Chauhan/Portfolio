@@ -1,31 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Syne, DM_Sans, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
+import { Nav } from "@/components/chrome/nav";
+import { Footer } from "@/components/chrome/footer";
+import { MobileIndex } from "@/components/chrome/mobile-index";
+import { ScrollProgress } from "@/components/chrome/scroll-progress";
+import { themeInitScript } from "@/components/chrome/theme-toggle";
+import { Providers } from "@/components/providers";
+import { fontVariables } from "@/lib/fonts";
 import { getRootJsonLd, siteConfig } from "@/lib/seo";
 import "./globals.css";
 
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
+const GA_ID = "G-1QEB2QFT9X";
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0a0a0a",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#edeae2" },
+    { media: "(prefers-color-scheme: dark)", color: "#121316" },
+  ],
 };
 
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
@@ -43,11 +36,7 @@ export const metadata: Metadata = {
   creator: siteConfig.author.name,
   publisher: siteConfig.author.name,
   category: "technology",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  formatDetection: { email: false, address: false, telephone: false },
   robots: {
     index: true,
     follow: true,
@@ -66,32 +55,19 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: "Jay Chauhan — Backend Engineer & AI Developer",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [siteConfig.ogImage],
     creator: siteConfig.twitterHandle,
     site: siteConfig.twitterHandle,
   },
   alternates: {
     canonical: siteConfig.url,
-    types: {
-      "application/rss+xml": `${siteConfig.url}/feed.xml`,
-    },
+    types: { "application/rss+xml": `${siteConfig.url}/feed.xml` },
   },
-  ...(googleSiteVerification
-    ? { verification: { google: googleSiteVerification } }
-    : {}),
+  ...(googleSiteVerification ? { verification: { google: googleSiteVerification } } : {}),
   icons: {
     icon: [
       { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -103,48 +79,45 @@ export const metadata: Metadata = {
 
 const jsonLd = getRootJsonLd();
 
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import CursorGlow from "@/components/CursorGlow";
-import ScrollProgress from "@/components/ScrollProgress";
-import BackToTop from "@/components/BackToTop";
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${syne.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
       <head>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-1QEB2QFT9X"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-1QEB2QFT9X');
-          `}
-        </Script>
+        {/* Must run before paint so the theme never flashes. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body>
-        <CursorGlow />
-        <ScrollProgress />
-        <Navigation />
-        {children}
-        <Footer />
-        <BackToTop />
+        <a
+          href="#premise"
+          className="label bg-paper text-ink border-ink sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:rounded-full focus:border focus:px-5 focus:py-3"
+        >
+          Skip to content
+        </a>
+
+        <div className="grain" aria-hidden="true" />
+
+        <Providers>
+          <ScrollProgress />
+          <Nav />
+          <MobileIndex />
+          {/* Solid paper plane so the sticky footer can reveal underneath. */}
+          <main className="bg-paper relative z-10 pb-20 xl:pb-0">{children}</main>
+          <div className="relative z-0">
+            <Footer />
+          </div>
+        </Providers>
+
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
+        </Script>
       </body>
     </html>
   );

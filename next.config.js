@@ -1,22 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'cdn.jsdelivr.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.credly.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.qwiklabs.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'is1-ssl.mzstatic.com',
+        pathname: '/gh/Jay3Chauhan/**',
       },
     ],
   },
@@ -27,8 +17,18 @@ const nextConfig = {
         headers: [
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
+          },
+        ],
+      },
+      {
+        // Fonts and immutable build assets never change under their hashed URL.
+        source: '/_next/static/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
     ];

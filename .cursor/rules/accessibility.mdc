@@ -1,0 +1,52 @@
+---
+description: Accessibility requirements for animated and interactive UI
+globs: src/components/**/*.tsx
+alwaysApply: false
+---
+
+# Accessibility
+
+A heavily animated site fails quietly for assistive tech unless each effect is
+explicitly accounted for. These are the recurring cases in this codebase.
+
+## Split text
+
+The parent carries the full sentence; the fragments are hidden.
+
+```tsx
+// ❌ BAD — announced as a run of disconnected words
+<h2>{words.map((w) => <motion.span key={w}>{w}</motion.span>)}</h2>
+
+// ✅ GOOD
+<motion.h2 aria-label={text}>
+  {words.map((w, i) => (
+    <span key={i} aria-hidden="true" className="inline-flex overflow-hidden">
+      <motion.span variants={item}>{w}&nbsp;</motion.span>
+    </span>
+  ))}
+</motion.h2>
+```
+
+## Decorative elements
+
+Marquees, oversized ghost numerals and watermark wordmarks get `aria-hidden="true"`.
+They repeat content that is already in the accessible tree.
+
+## Tabs and carousels
+
+Tabbed UI uses the real pattern: `role="tablist"` / `role="tab"` with `aria-selected`
+and `aria-controls`, roving `tabIndex`, and arrow-key navigation. See `sections/stack.tsx`.
+
+## Motion preferences
+
+Pinned and horizontal-scroll sections must degrade to a normally scrollable layout.
+Guard on both mount and preference so the first render matches SSR:
+
+```tsx
+const pinned = mounted && !reduce && distance > 0;
+```
+
+## Baseline
+
+Icon-only controls need `aria-label`. Status messages need `role="status"` and
+`aria-live="polite"`. Never remove the focus outline — it is styled globally.

@@ -59,12 +59,12 @@ Redis pub/sub distributes ticks across service instances, ensuring every connect
 
 Different data patterns demand different databases:
 
-| Data Type | Database | Reason |
-|-----------|----------|--------|
-| Trades, orders, user data | PostgreSQL | ACID transactions, complex joins |
-| Mutual fund NAVs, schemes | MySQL | Structured financial data |
-| Market feeds, screener cache | MongoDB | Flexible schema, fast writes |
-| Session cache, rate limiting | Redis | Sub-millisecond reads |
+| Data Type                    | Database   | Reason                           |
+| ---------------------------- | ---------- | -------------------------------- |
+| Trades, orders, user data    | PostgreSQL | ACID transactions, complex joins |
+| Mutual fund NAVs, schemes    | MySQL      | Structured financial data        |
+| Market feeds, screener cache | MongoDB    | Flexible schema, fast writes     |
+| Session cache, rate limiting | Redis      | Sub-millisecond reads            |
 
 ## Security: JWT + OAuth 2.0
 

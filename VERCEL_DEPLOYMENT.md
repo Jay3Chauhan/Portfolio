@@ -9,6 +9,7 @@
 ## ⚡ Quick Start (5 minutes)
 
 ### Step 1: Connect to Vercel
+
 1. Go to https://vercel.com
 2. Sign in with **GitHub**
 3. Click **"Add New..."** → **"Project"**
@@ -16,7 +17,9 @@
 5. Select branch: **master**
 
 ### Step 2: Configure (Auto-detected)
+
 Vercel automatically detects Next.js and configures:
+
 - ✅ Build Command: `npm run build`
 - ✅ Output Directory: `.next`
 - ✅ Install Command: `npm install`
@@ -24,6 +27,7 @@ Vercel automatically detects Next.js and configures:
 **No manual configuration needed!**
 
 ### Step 3: Deploy
+
 1. Click **"Deploy"**
 2. Wait 2-3 minutes
 3. 🎉 Your site is live!
@@ -33,11 +37,13 @@ Vercel automatically detects Next.js and configures:
 ## 📍 Your Vercel URL
 
 After deployment, you get a URL like:
+
 ```
 https://portfolio-XXXXX.vercel.app
 ```
 
 To use your custom domain `jaychauhan.tech`:
+
 1. In Vercel Dashboard → Project Settings
 2. Go to **Domains**
 3. Add `jaychauhan.tech`
@@ -48,6 +54,7 @@ To use your custom domain `jaychauhan.tech`:
 ## 🔄 Auto-Deploy
 
 Every push to `master` branch automatically:
+
 1. Triggers a build on Vercel
 2. Runs tests (if configured)
 3. Deploys to production
@@ -62,6 +69,7 @@ Every push to `master` branch automatically:
 No environment variables required for this project!
 
 But if you need to add any later:
+
 1. Vercel Dashboard → Project Settings → Environment Variables
 2. Add your variables
 3. Redeploy
@@ -84,6 +92,7 @@ But if you need to add any later:
 ## 📊 Performance Benefits
 
 Vercel gives you:
+
 - ✅ Global CDN (automatic)
 - ✅ Edge functions support
 - ✅ Automatic image optimization
@@ -97,6 +106,7 @@ Vercel gives you:
 ## 🔙 Rollback (If Needed)
 
 If something breaks:
+
 1. Vercel Dashboard → **Deployments** tab
 2. Find the working deployment
 3. Click the **three dots** (...)
@@ -109,19 +119,23 @@ Instant rollback! ✅
 ## 🆘 Troubleshooting
 
 ### Build Fails
+
 Check Vercel logs → Function logs → See error messages
 
 ### Site Shows 404
+
 - [ ] Is master branch up to date?
 - [ ] Check build logs for errors
 - [ ] Try redeploying manually
 
 ### Slow Performance
+
 - [ ] Check Vercel Analytics dashboard
 - [ ] Ensure images are optimized
 - [ ] Check for large dependencies
 
 ### Custom Domain Not Working
+
 - [ ] Wait 24 hours for DNS propagation
 - [ ] Verify DNS records in Vercel
 - [ ] Check domain registrar settings
@@ -139,8 +153,8 @@ Check Vercel logs → Function logs → See error messages
 
 ## ✨ Summary
 
-| Step                 | Time    | Status    |
-| -------------------- | ------- | --------- |
+| Step                 | Time    | Status     |
+| -------------------- | ------- | ---------- |
 | 1. Sign in to Vercel | 1 min   | ⏳ Do this |
 | 2. Import repository | 2 min   | ⏳ Do this |
 | 3. Deploy            | 1 click | ⏳ Do this |

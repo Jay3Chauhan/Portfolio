@@ -1,0 +1,45 @@
+---
+description: Motion and Lenis conventions, and the performance traps to avoid
+globs: src/components/**/*.tsx
+alwaysApply: false
+---
+
+# Motion & Scroll
+
+`motion` v13 (import from `motion/react`) with `lenis` driving smooth scroll from
+Motion's frame loop. Lenis moves the real native scroll position, so `useScroll`,
+`position: sticky` and IntersectionObserver all work with no bridging.
+
+## Never re-render on scroll
+
+```tsx
+// ❌ BAD — a React render every frame; this is the INP killer
+const [y, setY] = useState(0);
+useLenis(({ scroll }) => setY(scroll));
+
+// ✅ GOOD — MotionValue updates the DOM outside React
+const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+return <motion.div style={{ y }} />;
+```
+
+State in a scroll callback is allowed only for values that change a handful of
+times — an active index, or a threshold crossing via `useMotionValueEvent`.
+
+## Rules
+
+- `useScroll`'s `offset` defaults to `["start start", "end end"]`. Pass it explicitly.
+- Don't wrap a scroll value in `useSpring`. Lenis is already lerping; double-smoothing
+  feels worse and drops off the compositor-accelerated path.
+- Prefer `whileInView` over `useInView` + state — it rides a pooled observer.
+  Always pass `viewport={{ once: true }}` unless re-triggering is the point.
+- `will-change` only on things that animate repeatedly (marquees, parallax layers).
+  On every reveal element it makes the page slower, not faster.
+- Reduced motion: `<MotionConfig reducedMotion="user">` covers Motion, and Lenis
+  handles it natively. Only hand-roll for parallax driven by MotionValues.
+
+## Client boundaries
+
+Scroll hooks require `"use client"`. Keep those components as leaves — the page and
+layout stay Server Components. A section that only needs a reveal should compose the
+client `Reveal` primitive rather than becoming a client component itself.
