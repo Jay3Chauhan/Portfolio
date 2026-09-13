@@ -1,10 +1,9 @@
-"use client";
-
 import { ContactForm } from "@/components/sections/contact-form";
 import { Magnetic } from "@/components/primitives/magnetic";
 import { Parallax } from "@/components/primitives/parallax";
 import { Reveal, SplitText } from "@/components/primitives/split-text";
 import { SectionHeader } from "@/components/primitives/section-header";
+import { contactForm } from "@/content/forms";
 import { contact, identity, socials } from "@/content/site";
 
 export function Contact() {
@@ -21,7 +20,7 @@ export function Contact() {
         </Parallax>
       </div>
 
-      <SectionHeader index="09" kicker="Contact" />
+      <SectionHeader index="10" kicker="Contact" />
 
       <div className="gutter mt-12">
         <SplitText
@@ -78,6 +77,7 @@ export function Contact() {
                         className="link-wipe text-ink text-sm font-light"
                       >
                         Download PDF ↗
+                        <span className="sr-only"> (opens in a new tab)</span>
                       </a>
                     </Magnetic>
                   </dd>
@@ -99,6 +99,7 @@ export function Contact() {
                       >
                         {social.label}
                         <span className="text-whisper ml-2 text-xs">{social.handle}</span>
+                        <span className="sr-only"> (opens in a new tab)</span>
                       </a>
                     </Magnetic>
                   </li>
@@ -108,7 +109,7 @@ export function Contact() {
           </div>
 
           <Reveal delay={0.1}>
-            <p className="label text-whisper mb-8">Or write here</p>
+            <p className="label text-whisper mb-8">{contactForm.intro}</p>
             <ContactForm />
           </Reveal>
         </div>

@@ -6,10 +6,12 @@ import { Marquee } from "@/components/primitives/marquee";
 import { RiseText } from "@/components/primitives/rise-text";
 import { ScrollCue } from "@/components/primitives/scroll-cue";
 import { identity, ticker } from "@/content/site";
+import { useHydrated } from "@/lib/use-hydrated";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const hydrated = useHydrated();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -29,6 +31,11 @@ export function Hero() {
     reduce ? ["0%", "0%"] : ["0%", "-14%"],
   );
 
+  // The hero is above the fold, so nothing here may depend on hydration to be
+  // visible. Gating only keeps the MotionValues out of the SSR markup; every
+  // range starts at its identity value, so the ungated paint is the correct one.
+  const scrub = hydrated && !reduce;
+
   return (
     <section
       ref={ref}
@@ -40,7 +47,7 @@ export function Hero() {
       </h1>
 
       <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
+        style={scrub ? { y: contentY, opacity: contentOpacity } : undefined}
         className="gutter flex flex-1 flex-col justify-center pt-6 pb-8 sm:pt-12"
       >
         <div
@@ -83,12 +90,15 @@ export function Hero() {
       </motion.div>
 
       <div className="pb-6">
-        <motion.div style={{ x: wordmarkX }} className="will-change-transform">
+        <motion.div
+          style={scrub ? { x: wordmarkX } : undefined}
+          className={scrub ? "will-change-transform" : undefined}
+        >
           <Marquee
             items={[identity.wordmark]}
             separator="·"
             duration={30}
-            className="text-ink/[0.09] dark:text-ink/[0.12]"
+            className="text-ink/10"
             itemClassName="wordmark text-[clamp(3.25rem,12.5vw,13rem)] leading-[0.82] whitespace-nowrap select-none"
           />
         </motion.div>

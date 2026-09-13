@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Dev-only. Without these, `next dev` returns 403 for every /_next/static
+  // chunk requested from a LAN address, so a phone (or a desktop tab opened on
+  // the Network URL) hydrates against whatever stale JS it still has cached.
+  allowedDevOrigins: ['127.0.0.1', '192.168.*.*', '10.*.*.*', '*.local'],
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -24,13 +28,10 @@ const nextConfig = {
           },
         ],
       },
-      {
-        // Fonts and immutable build assets never change under their hashed URL.
-        source: '/_next/static/:path*',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
+      // No Cache-Control override for /_next/static — Next already serves
+      // hashed build assets as `immutable, max-age=31536000`, and forcing that
+      // header ourselves also applies it to *dev* chunks, which is how a
+      // browser ends up hydrating fresh HTML against a year-old bundle.
     ];
   },
 };

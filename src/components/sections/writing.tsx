@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Magnetic } from "@/components/primitives/magnetic";
-import { Reveal } from "@/components/primitives/split-text";
+import { ScrollLift } from "@/components/primitives/scroll-effects";
 import { SectionHeader } from "@/components/primitives/section-header";
 import { getAllPosts } from "@/lib/blog";
 import { formatDateShort } from "@/lib/utils";
@@ -19,10 +19,15 @@ export function Writing() {
         lede="Longer form on the things that were hard enough to be worth writing down."
       />
 
+      {/* Each row owns its own scroll pass, so they drift against one another
+          on the way through the viewport instead of firing once and freezing.
+          Transform only — dimming this copy would cost contrast. */}
       <ul className="gutter mt-16">
-        {posts.map((post, i) => (
+        {posts.map((post) => (
           <li key={post.slug} className="rule-t last:rule-b">
-            <Reveal delay={i * 0.06}>
+            {/* Keep the travel well under the row's 2rem padding or the copy
+                drifts into the hairline above it. */}
+            <ScrollLift lift={13} scaleFrom={0.995}>
               <Link
                 href={`/blog/${post.slug}`}
                 className="group relative isolate block overflow-hidden"
@@ -61,7 +66,7 @@ export function Writing() {
                   </span>
                 </div>
               </Link>
-            </Reveal>
+            </ScrollLift>
           </li>
         ))}
       </ul>

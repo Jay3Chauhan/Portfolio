@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef, type ReactNode } from "react";
+import { useHydrated } from "@/lib/use-hydrated";
 import { cn } from "@/lib/utils";
 
 type ParallaxProps = {
@@ -19,6 +20,11 @@ type ParallaxProps = {
 /**
  * Leaf parallax driven by MotionValues. Reduced-motion users get a static
  * element — the MotionConfig flag does not cancel style-bound transforms.
+ *
+ * Before hydration the element renders the *start* of each range as a plain
+ * inline style. Leaving the MotionValues bound during SSR was serialising a
+ * transform into the markup, and dropping the style entirely would flash a
+ * ghost wordmark at full opacity before the first frame.
  */
 export function Parallax({
   children,
@@ -31,6 +37,7 @@ export function Parallax({
 }: ParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const hydrated = useHydrated();
 
   const { scrollYProgress } = useScroll({ target: ref, offset });
 
@@ -47,16 +54,29 @@ export function Parallax({
     reduce || !scale ? [1, 1] : scale,
   );
 
+  const scrub = hydrated && !reduce;
+
+  const resting = {
+    y: y?.[0],
+    x: x?.[0],
+    opacity: opacity?.[0],
+    scale: scale?.[0],
+  };
+
   return (
     <motion.div
       ref={ref}
-      className={cn("will-change-transform", className)}
-      style={{
-        y: y ? yMv : undefined,
-        x: x ? xMv : undefined,
-        opacity: opacity ? opacityMv : undefined,
-        scale: scale ? scaleMv : undefined,
-      }}
+      className={cn(scrub && "will-change-transform", className)}
+      style={
+        scrub
+          ? {
+              y: y ? yMv : undefined,
+              x: x ? xMv : undefined,
+              opacity: opacity ? opacityMv : undefined,
+              scale: scale ? scaleMv : undefined,
+            }
+          : resting
+      }
     >
       {children}
     </motion.div>

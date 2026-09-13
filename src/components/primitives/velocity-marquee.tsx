@@ -7,7 +7,6 @@ import {
   useMotionValue,
   useReducedMotion,
   useScroll,
-  useSpring,
   useTransform,
   useVelocity,
 } from "motion/react";
@@ -46,13 +45,14 @@ export function VelocityMarquee({
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 48,
-    stiffness: 380,
-  });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1200], [0, 4], {
+  const velocityFactor = useTransform(scrollVelocity, [0, 1200], [0, 4], {
     clamp: false,
   });
+
+  // Smoothing happens on a plain ref inside the frame loop already running
+  // below. A `useSpring` around a scroll value spins up a second animation
+  // loop and leaves the track visibly lagging the page.
+  const smoothed = useRef(0);
 
   const x = useTransform(baseX, (value) => `${wrap(-50, 0, value)}%`);
 
@@ -62,7 +62,10 @@ export function VelocityMarquee({
     // A backgrounded tab hands back a huge delta on return; without the clamp
     // the track teleports.
     const step = Math.min(delta, 50) / 1000;
-    const factor = velocityFactor.get();
+
+    // Exponential ease toward the raw scroll factor, framerate-independent.
+    smoothed.current += (velocityFactor.get() - smoothed.current) * Math.min(1, step * 9);
+    const factor = smoothed.current;
 
     if (factor < 0) direction.current = -1;
     else if (factor > 0) direction.current = 1;

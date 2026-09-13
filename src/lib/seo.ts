@@ -1,3 +1,5 @@
+import { apps } from "@/content/production";
+
 export const siteConfig = {
   name: "Jay Chauhan — Portfolio",
   shortName: "Jay Chauhan",
@@ -74,6 +76,13 @@ export function getPersonJsonLd() {
     jobTitle: siteConfig.author.jobTitle,
     description: siteConfig.description,
     email: `mailto:${siteConfig.email}`,
+    telephone: siteConfig.phone,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Surat",
+      addressRegion: "Gujarat",
+      addressCountry: "IN",
+    },
     sameAs: siteConfig.author.sameAs,
     worksFor: {
       "@type": "Organization",
@@ -172,9 +181,67 @@ export function getBlogListJsonLd(
   };
 }
 
+/**
+ * The home page is a profile, not a generic page. `ProfilePage` + `mainEntity`
+ * is what search engines read to attribute the whole site to one person, which
+ * is how you end up with a knowledge panel rather than four loose blue links.
+ */
+export function getProfilePageJsonLd() {
+  return {
+    "@type": "ProfilePage",
+    "@id": `${siteConfig.url}/#webpage`,
+    url: siteConfig.url,
+    name: siteConfig.title,
+    description: siteConfig.description,
+    isPartOf: { "@id": `${siteConfig.url}/#website` },
+    mainEntity: { "@id": `${siteConfig.url}/#person` },
+    primaryImageOfPage: { "@type": "ImageObject", url: siteConfig.ogImage },
+    inLanguage: siteConfig.language,
+  };
+}
+
+/**
+ * One node per shipped app. Deliberately no `aggregateRating` — the stars live
+ * on the stores, and claiming them here is the kind of self-serving markup
+ * Search Console flags.
+ */
+export function getAppsJsonLd(
+  apps: ReadonlyArray<{
+    id: string;
+    name: string;
+    tagline: string;
+    contribution: string;
+    links: ReadonlyArray<{ store: string; href: string }>;
+  }>,
+) {
+  return apps.map((app) => ({
+    "@type": "SoftwareApplication",
+    "@id": `${siteConfig.url}/#app-${app.id}`,
+    name: app.name,
+    description: app.tagline,
+    applicationCategory: "FinanceApplication",
+    operatingSystem: app.links
+      .map((link) => (link.store === "App Store" ? "iOS" : "Android"))
+      .join(", "),
+    url: app.links[0]?.href,
+    sameAs: app.links.map((link) => link.href),
+    author: { "@id": `${siteConfig.url}/#person` },
+  }));
+}
+
 export function getRootJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@graph": [getPersonJsonLd(), getWebSiteJsonLd(), getWebPageJsonLd()],
+    "@graph": [
+      getPersonJsonLd(),
+      getWebSiteJsonLd(),
+      getProfilePageJsonLd(),
+      ...getAppsJsonLd(apps),
+    ],
   };
+}
+
+/** Escape `<` so a string in the graph cannot close a surrounding script tag. */
+export function serializeJsonLd(data: unknown): string {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
 }

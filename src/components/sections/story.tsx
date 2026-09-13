@@ -140,7 +140,7 @@ export function Story() {
                       onClick={() => goToChapter(i)}
                       aria-current={index === i ? "true" : undefined}
                       className={cn(
-                        "label cursor-pointer tabular-nums transition-colors duration-400",
+                        "label flex min-h-11 cursor-pointer items-center px-1 tabular-nums transition-colors duration-400",
                         index === i ? "text-ink" : "text-whisper hover:text-mist",
                       )}
                     >
@@ -156,8 +156,12 @@ export function Story() {
             </nav>
 
             <div className="grid items-center gap-8 pt-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:pt-12">
+              {/* The pin is a fixed 100svh box with `overflow-hidden`, so the
+                  plate is capped tightly on phones: at the old 26svh the plate
+                  plus the longest chapter body overflowed a 667px viewport and
+                  got cut off. */}
               <figure className="relative">
-                <div className="text-ink relative aspect-[4/3] max-h-[26svh] w-full overflow-hidden lg:max-h-none">
+                <div className="text-ink relative aspect-[4/3] max-h-[16svh] w-full overflow-hidden sm:max-h-[26svh] lg:max-h-none">
                   <AnimatePresence mode="popLayout">
                     <motion.div key={chapter.year} {...fade} className="absolute inset-0">
                       <FigurePlate

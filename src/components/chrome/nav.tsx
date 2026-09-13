@@ -102,7 +102,7 @@ export function Nav() {
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              className="label text-ink lg:hidden"
+              className="label text-ink -mr-2 flex min-h-11 items-center px-2 lg:hidden"
               aria-label="Open menu"
               aria-expanded={menuOpen}
             >
@@ -130,7 +130,7 @@ export function Nav() {
               <button
                 type="button"
                 onClick={() => setMenuOpen(false)}
-                className="label text-ink"
+                className="label text-ink -mr-2 flex min-h-11 items-center px-2"
                 aria-label="Close menu"
               >
                 Close

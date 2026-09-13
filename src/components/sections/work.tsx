@@ -81,7 +81,8 @@ export function Work() {
             ref={trackRef}
             style={pinned ? { x } : undefined}
             className={cn(
-              "flex w-max gap-6 px-[var(--spacing-gutter)] will-change-transform",
+              "flex w-max gap-6 px-[var(--spacing-gutter)]",
+              pinned && "will-change-transform",
               !pinned && "w-full snap-x snap-mandatory overflow-x-auto pb-6",
             )}
           >
@@ -133,12 +134,18 @@ function WorkPanel({
 }) {
   return (
     <Tilt className="shrink-0 snap-center">
+      {/* Recede/dim is a CSS class toggled when the active index changes — a
+          handful of times per pass. Do NOT scrub these off `scrollYProgress`:
+          four 86vw panels re-rasterising every frame inside `Tilt`'s
+          `preserve-3d` context exhausts the compositor and kills the renderer. */}
       <article
         className={cn(
           "border-line bg-paper-raised/60 relative flex w-[86vw] flex-col",
           "border p-5 transition-[transform,opacity,border-color] duration-700 ease-editorial sm:p-9 lg:w-[62vw] xl:w-[54vw]",
           active && "border-line-strong",
-          dimmed && "scale-[0.94] opacity-45",
+          // 0.72 is the opacity floor the palette is tuned to. At the previous
+          // 0.45 the peeking neighbour's body copy fell under WCAG AA.
+          dimmed && "scale-[0.955] opacity-[0.72]",
         )}
       >
         <span
@@ -209,6 +216,7 @@ function WorkPanel({
                 className="label link-wipe text-ink shrink-0"
               >
                 View ↗
+                <span className="sr-only"> {item.name} (opens in a new tab)</span>
               </a>
             </Magnetic>
           ) : (

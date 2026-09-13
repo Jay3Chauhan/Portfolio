@@ -1,49 +1,41 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import {
+  applyTheme,
+  schemeIsDark,
+  THEME_STORAGE_KEY,
+  type Theme,
+} from "@/lib/theme";
 import { useHydrated } from "@/lib/use-hydrated";
+import { cn } from "@/lib/utils";
 
-export const THEME_STORAGE_KEY = "jc-theme";
-
-/**
- * Runs before first paint to stamp the theme class on <html>, so the page
- * never flashes the wrong palette. Inlined in the document head.
- */
-export const themeInitScript = `
-(function(){
-  try {
-    var stored = localStorage.getItem('${THEME_STORAGE_KEY}');
-    var dark = stored ? stored === 'dark'
-      : window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.classList.toggle('dark', dark);
-  } catch (e) {}
-})();
-`;
-
-/** The <html> class is the source of truth, so read it rather than mirroring it. */
-function subscribeToThemeClass(onChange: () => void) {
+function subscribeToScheme(onChange: () => void) {
   const observer = new MutationObserver(onChange);
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["class"],
   });
-  return () => observer.disconnect();
+
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  media.addEventListener("change", onChange);
+
+  return () => {
+    observer.disconnect();
+    media.removeEventListener("change", onChange);
+  };
 }
 
 export function ThemeToggle({ className }: { className?: string }) {
   const hydrated = useHydrated();
 
-  const dark = useSyncExternalStore(
-    subscribeToThemeClass,
-    () => document.documentElement.classList.contains("dark"),
-    () => false,
-  );
+  const dark = useSyncExternalStore(subscribeToScheme, schemeIsDark, () => false);
 
   function toggle() {
-    const next = !dark;
-    document.documentElement.classList.toggle("dark", next);
+    const next: Theme = dark ? "light" : "dark";
+    applyTheme(next);
     try {
-      localStorage.setItem(THEME_STORAGE_KEY, next ? "dark" : "light");
+      localStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {
       /* storage unavailable — the toggle still works for this session */
     }
@@ -53,7 +45,12 @@ export function ThemeToggle({ className }: { className?: string }) {
     <button
       type="button"
       onClick={toggle}
-      className={className}
+      // The switch itself is 34×18; the hit area is padded out to 44px so it
+      // clears the minimum touch target without changing the visual.
+      className={cn(
+        "-mx-2 flex min-h-11 min-w-11 items-center justify-center px-2",
+        className,
+      )}
       aria-label={`Switch to ${dark ? "light" : "dark"} theme`}
       aria-pressed={hydrated ? dark : undefined}
     >

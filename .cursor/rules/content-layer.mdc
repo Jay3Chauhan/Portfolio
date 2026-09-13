@@ -12,11 +12,16 @@ they never contain a project name, metric, date or paragraph inline.
 | Module          | Owns                                                  |
 | --------------- | ----------------------------------------------------- |
 | `site.ts`       | Identity, contact, socials, nav, headline figures     |
+| `premise.ts`    | Section 01 — portrait, headline, body copy, dossier   |
 | `work.ts`       | Flagship projects + the public `archive`              |
 | `stack.ts`      | The four disciplines behind the section 03 explorer   |
+| `approach.ts`   | Manifesto, the four principles, the method strip      |
 | `story.ts`      | Timeline chapters and which schematic plate each uses |
 | `signals.ts`    | Proof claims and the credential ledger                |
 | `production.ts` | Shipped apps and the pipeline strip                   |
+| `feed.ts`       | Section 09 copy — the posts come from the bridge      |
+| `forms.ts`      | Contact form labels, prompts and every status string  |
+| `playground.ts` | The closing type tray, and the sorts loose in it      |
 
 ## Accuracy bar
 

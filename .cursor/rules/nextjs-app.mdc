@@ -6,7 +6,9 @@ alwaysApply: false
 
 # App Router
 
-Every route here is static. Keep it that way — nothing on this site needs a request.
+Pages prerender. Keep it that way. The contact form is a server action; the LinkedIn
+feed is ISR only when `LINKEDIN_FEED_URL` is set. Do not opt the homepage into
+`cookies()` or `headers()` just to read a preference.
 
 ## Server by default
 

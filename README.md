@@ -3,80 +3,67 @@
 Personal site for Jay Chauhan — Backend & AI Engineer. A single-page editorial
 portfolio plus a small technical blog.
 
-The design language is Swiss editorial print: bone paper, ink type, hairline rules,
-numbered sections, wide-tracked monospace micro-labels, and scroll-driven motion
-that stays out of the way. Photography is replaced by drawn schematic plates,
-because a backend portfolio has no product shots worth showing.
+The design language is Swiss editorial print: bone paper, ink type, hairline
+rules, numbered sections, wide-tracked monospace micro-labels, and scroll-driven
+motion that stays out of the way.
 
 ## Stack
 
 | Concern   | Choice                                                        |
 | --------- | ------------------------------------------------------------- |
 | Framework | Next.js 16 (App Router, Turbopack) · React 19 · TypeScript    |
-| Styling   | Tailwind CSS v4 — CSS-first config, no `tailwind.config.js`   |
-| Motion    | `motion` v13 · `lenis` smooth scroll on Motion's frame loop   |
-| Type      | Archivo (variable width) · Newsreader · JetBrains Mono        |
+| Styling   | Tailwind CSS v4 — CSS-first config in `src/app/globals.css`   |
+| Motion    | `motion` v13 · `lenis` on Motion's frame loop                 |
+| Type      | Archivo · Newsreader · JetBrains Mono                         |
 | Content   | Typed modules in `src/content/` · Markdown in `content/blog/` |
-| Forms     | Web3Forms                                                     |
+| Mail      | Resend, via a server action                                   |
 | Hosting   | Vercel                                                        |
 
-Every route prerenders to static HTML.
+Pages prerender to static HTML. The contact form is a server action. The LinkedIn
+shelf is ISR when a feed URL is set.
 
 ## Getting started
 
 ```bash
 npm install
-cp .env.example .env.local   # then fill in the two keys
+cp .env.example .env.local
 npm run dev
 ```
 
-| Script              | Does                                  |
-| ------------------- | ------------------------------------- |
-| `npm run dev`       | Dev server on :3000                   |
-| `npm run build`     | Production build                      |
-| `npm run start`     | Serve the production build            |
-| `npm run lint`      | ESLint (flat config)                  |
-| `npm run typecheck` | `tsc --noEmit`                        |
-| `npm run format`    | Prettier, with Tailwind class sorting |
+| Script              | Does                       |
+| ------------------- | -------------------------- |
+| `npm run dev`       | Dev server on :3000        |
+| `npm run build`     | Production build           |
+| `npm run start`     | Serve the production build |
+| `npm run lint`      | ESLint (flat config)       |
+| `npm run typecheck` | `tsc --noEmit`             |
+| `npm run format`    | Prettier                   |
 
-### Environment
+Secrets, Search Console, Resend, the LinkedIn bridge, and Vercel DNS live in
+**[docs/setup.md](docs/setup.md)**. None of them are required to run locally.
 
-Both are optional — the site builds and runs without them.
-
-| Variable                           | Purpose                           |
-| ---------------------------------- | --------------------------------- |
-| `GOOGLE_SITE_VERIFICATION`         | Search Console ownership meta tag |
-| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Contact form endpoint             |
-
-## Structure
+## Layout
 
 ```
-content/blog/           Markdown posts with frontmatter
+content/blog/           Markdown posts
+docs/                   Operator setup (env, mail, SEO, deploy)
 src/
-  app/                  Routes, globals.css, sitemap/robots/manifest/OG image
+  app/                  Routes, globals.css, sitemap / robots / OG
+  app/actions/          Server actions (contact)
   components/
-    primitives/         SmoothScroll, RiseText, SplitText, Reveal, Marquee,
-                        Magnetic, Counter, FigurePlate, SectionHeader
-    chrome/             Nav, Footer, ScrollProgress, ThemeToggle
+    primitives/         Motion and layout building blocks
+    chrome/             Nav, footer, theme, rails
     sections/           One file per numbered homepage section
-  content/              All portfolio copy and data, typed
-  lib/                  fonts, seo, blog, utils, og-fonts
+  content/              All portfolio copy, typed
+  lib/                  fonts, seo, blog, linkedin, theme
 ```
 
-The homepage reads as a numbered document: `01` premise, `02` selected work
-(pinned horizontal scroll), `03` the stack explorer, `04` a pinned story timeline,
-`05` verifiable signals, `06` shipped apps, `07` contact.
-
-## Editing content
-
-All copy lives in `src/content/`. To change a project, a metric or a timeline
-chapter, edit the relevant module — components never contain copy. See
-`.cursor/rules/content-layer.mdc` for the accuracy bar these numbers are held to.
+The homepage reads as a numbered document: `01` premise, `02` work, `03` stack,
+`04` approach, `05` story, `06` signals, `07` live apps, `08` writing, `09` feed,
+`10` contact, then the unnumbered type tray.
 
 ## Conventions
 
-`AGENTS.md` and `.cursor/rules/` document the rules this codebase is held to:
-semantic colour tokens only, transform/opacity-only animation, no `setState` in
-scroll callbacks, and no `opacity: 0` above the fold. Worth reading before
-contributing — several of them exist because the alternative measurably hurts
-Core Web Vitals.
+`AGENTS.md` and `.cursor/rules/` are the rules this codebase is held to: content
+in `src/content/`, semantic colour tokens only, transform/opacity-only animation,
+no `setState` in scroll callbacks, and no `opacity: 0` above the fold.

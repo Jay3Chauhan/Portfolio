@@ -53,6 +53,7 @@ export const sections = [
   { label: "Signals", href: "#signals", index: "06" },
   { label: "Live", href: "#production", index: "07" },
   { label: "Writing", href: "#writing", index: "08" },
+  { label: "Feed", href: "#feed", index: "09" },
 ] as const;
 
 

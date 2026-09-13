@@ -8,6 +8,7 @@ import {
   type MotionValue,
 } from "motion/react";
 import { useRef } from "react";
+import { useHydrated } from "@/lib/use-hydrated";
 import { cn } from "@/lib/utils";
 
 type ScrollReadAlongProps = {
@@ -30,6 +31,7 @@ type ScrollReadAlongProps = {
 export function ScrollReadAlong({ text, className }: ScrollReadAlongProps) {
   const ref = useRef<HTMLParagraphElement>(null);
   const reduce = useReducedMotion();
+  const hydrated = useHydrated();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -50,7 +52,9 @@ export function ScrollReadAlong({ text, className }: ScrollReadAlongProps) {
             // overlap slightly so the leading edge reads as a sweep rather
             // than a row of independently blinking words.
             range={[i / words.length, (i + 1.6) / words.length]}
-            reduce={Boolean(reduce)}
+            // Pre-hydration every word renders fully inked and static, so the
+            // SSR paragraph carries no per-word opacity for React to reconcile.
+            reduce={Boolean(reduce) || !hydrated}
             trailingSpace={i < words.length - 1}
           >
             {word}

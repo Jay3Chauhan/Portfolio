@@ -7,7 +7,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        // Never disallow /_next/ — Googlebot renders the page, and blocking the
+        // JS and CSS bundles makes it index an unstyled, half-built DOM.
+        disallow: ["/api/"],
       },
     ],
     host: siteConfig.url,

@@ -40,8 +40,6 @@ Thumbs.db
 
 # Misc
 *.pem
-old_portfolio_index.html
-index.html
 *.tsbuildinfo
 
 # Local design review screenshots
@@ -49,8 +47,3 @@ index.html
 
 # Vercel
 .vercel
-
-# Local deployment docs (not committed to repo)
-DEPLOYMENT_SUMMARY.md
-SEO_VERIFICATION_REPORT.md
-RENDER_*.md

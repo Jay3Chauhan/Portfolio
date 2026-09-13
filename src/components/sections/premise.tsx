@@ -1,22 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import { Counter } from "@/components/primitives/counter";
+import { DepthCard } from "@/components/primitives/scroll-effects";
 import { Reveal, RuleLine, SplitText } from "@/components/primitives/split-text";
 import { SectionHeader } from "@/components/primitives/section-header";
+import { dossier, footnote, headline, paragraphs, portrait } from "@/content/premise";
 import { figures, identity } from "@/content/site";
 import { cn } from "@/lib/utils";
-
-const portrait =
-  "https://cdn.jsdelivr.net/gh/Jay3Chauhan/portfolio-assets@main/pic1.png";
-
-const dossier = [
-  { key: "Role", value: "Software Engineer" },
-  { key: "Company", value: "Arhamshare Pvt Ltd." },
-  { key: "Since", value: "January 2024" },
-  { key: "Education", value: "B.E. — Gujarat Technological University" },
-  { key: "Based", value: "Surat, Gujarat, India" },
-];
 
 export function Premise() {
   return (
@@ -27,54 +16,35 @@ export function Premise() {
         <div>
           <SplitText
             as="h2"
-            text="Backends that stay up, and AI that cites its sources."
+            text={headline}
             className="font-display text-title max-w-[15ch] font-light"
           />
 
           <div className="text-mist mt-8 max-w-[54ch] space-y-5 text-base leading-relaxed font-light sm:mt-10 sm:space-y-6 sm:text-lg">
-            <Reveal delay={0.05}>
-              <p>
-                I write the services underneath fintech products — trading, mutual funds,
-                and the RBI Account Aggregator consent rails that let money data move with
-                permission. Python and FastAPI, mostly, with PostgreSQL and MongoDB
-                holding the state and NGINX in front of all of it.
-              </p>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <p>
-                The other half of the work is retrieval. ComplianceIQ answers questions
-                about RBI and SEBI regulation using a model that is not allowed to respond
-                without a citation, because a confident wrong answer is worse than no
-                answer in a regulated market.
-              </p>
-            </Reveal>
-            <Reveal delay={0.19}>
-              <p>
-                Before any of this I founded a Google Developer Student Club and grew it
-                to 508 members, which is where I learned that most systems are mostly
-                people.
-              </p>
-            </Reveal>
+            {paragraphs.map((paragraph, i) => (
+              <Reveal key={i} delay={0.05 + i * 0.07}>
+                <p>{paragraph}</p>
+              </Reveal>
+            ))}
           </div>
 
           <Reveal delay={0.24} className="mt-10 sm:mt-12">
             <p className="label text-ink">
-              8+ services in production
+              {footnote.lead}
               <span className="text-whisper px-3">·</span>
-              <span className="text-mist">No theatre, just uptime</span>
+              <span className="text-mist">{footnote.trail}</span>
             </p>
           </Reveal>
         </div>
 
         <div className="lg:pt-2">
-          {/* Portrait stays a plain sized box — no ClipReveal / Parallax around
-              next/image fill. Those wrappers were collapsing the image to
-              height 0 or clipping it below the fold. */}
+          {/* Portrait stays a plain sized box — no masked/parallax wrapper around
+              next/image fill. Those wrappers collapsed the image to height 0. */}
           <Reveal>
             <figure>
               <div className="bg-paper-sunk border-line relative aspect-[4/5] w-full overflow-hidden border">
                 <Image
-                  src={portrait}
+                  src={portrait.src}
                   alt={`${identity.fullName}, ${identity.role}`}
                   fill
                   priority
@@ -83,7 +53,7 @@ export function Premise() {
                 />
               </div>
               <figcaption className="label text-mist mt-4">
-                Fig. 00 — {identity.fullName}, {identity.location}
+                {portrait.figure} — {identity.fullName}, {identity.location}
               </figcaption>
             </figure>
           </Reveal>
@@ -108,9 +78,9 @@ export function Premise() {
         <RuleLine />
         <dl className="grid grid-cols-2 overflow-visible md:grid-cols-4">
           {figures.map((figure, i) => (
-            <Reveal
+            <DepthCard
               key={figure.label}
-              delay={i * 0.06}
+              delay={i * 0.08}
               className={cn(
                 // dt precedes dd in the DOM so the <dl> stays valid; the visual
                 // order (figure first) comes back via flex-col-reverse.
@@ -130,7 +100,7 @@ export function Premise() {
                   duration={1.4 + i * 0.15}
                 />
               </dd>
-            </Reveal>
+            </DepthCard>
           ))}
         </dl>
       </div>

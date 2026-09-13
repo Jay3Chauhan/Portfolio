@@ -12,6 +12,7 @@ import {
   getBreadcrumbJsonLd,
   getWebPageJsonLd,
   siteConfig,
+  serializeJsonLd,
 } from "@/lib/seo";
 
 interface Props {
@@ -78,7 +79,7 @@ export default async function BlogPostPage({ params }: Props) {
     <article className="gutter pt-[calc(var(--nav-h)+clamp(3rem,8vh,5rem))]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       <Link

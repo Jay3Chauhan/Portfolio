@@ -4,10 +4,9 @@ import { Nav } from "@/components/chrome/nav";
 import { Footer } from "@/components/chrome/footer";
 import { MobileIndex } from "@/components/chrome/mobile-index";
 import { ScrollProgress } from "@/components/chrome/scroll-progress";
-import { themeInitScript } from "@/components/chrome/theme-toggle";
 import { Providers } from "@/components/providers";
 import { fontVariables } from "@/lib/fonts";
-import { getRootJsonLd, siteConfig } from "@/lib/seo";
+import { getRootJsonLd, serializeJsonLd, siteConfig } from "@/lib/seo";
 import "./globals.css";
 
 const GA_ID = "G-1QEB2QFT9X";
@@ -22,6 +21,7 @@ export const viewport: Viewport = {
 };
 
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
+const bingSiteVerification = process.env.BING_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -67,7 +67,16 @@ export const metadata: Metadata = {
     canonical: siteConfig.url,
     types: { "application/rss+xml": `${siteConfig.url}/feed.xml` },
   },
-  ...(googleSiteVerification ? { verification: { google: googleSiteVerification } } : {}),
+  ...(googleSiteVerification || bingSiteVerification
+    ? {
+        verification: {
+          ...(googleSiteVerification ? { google: googleSiteVerification } : {}),
+          ...(bingSiteVerification
+            ? { other: { "msvalidate.01": bingSiteVerification } }
+            : {}),
+        },
+      }
+    : {}),
   icons: {
     icon: [
       { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -83,11 +92,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={fontVariables} suppressHydrationWarning>
       <head>
-        {/* Must run before paint so the theme never flashes. */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {/* `application/ld+json` is a data block — React 19 will not warn,
+            and crawlers that skip JS still see the graph in the HTML. */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
         />
       </head>
       <body>

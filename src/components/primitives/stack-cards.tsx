@@ -8,6 +8,7 @@ import {
   type MotionValue,
 } from "motion/react";
 import { Children, useRef, type ReactNode } from "react";
+import { useHydrated } from "@/lib/use-hydrated";
 import { cn } from "@/lib/utils";
 
 type StackCardsProps = {
@@ -76,11 +77,14 @@ function StackItem({
   className?: string;
 }) {
   const reduce = useReducedMotion();
+  const hydrated = useHydrated();
   const isLast = index === total - 1;
 
   // Veil across the slice where the next card climbs over this one.
   const span: [number, number] = [index / total, (index + 1) / total];
   const veil = useTransform(progress, span, [0, isLast ? 0 : 0.88]);
+
+  const scrub = hydrated && !reduce;
 
   return (
     <div
@@ -110,12 +114,14 @@ function StackItem({
           {children}
 
           {/* Dim with a paper veil — never scale the card. Scale shrinks the
-              opaque surface and lets the copy underneath bleed through. */}
+              opaque surface and lets the copy underneath bleed through.
+              An unbound MotionValue defaults to opacity 1, which would render a
+              blank sheet server-side, so the pre-hydration state is pinned to 0. */}
           {reduce ? null : (
             <motion.span
               aria-hidden="true"
               className="bg-paper-raised pointer-events-none absolute inset-0"
-              style={{ opacity: veil }}
+              style={scrub ? { opacity: veil } : { opacity: 0 }}
             />
           )}
         </article>

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { SectionRail } from "@/components/chrome/section-rail";
 import { Hero } from "@/components/sections/hero";
 import { Premise } from "@/components/sections/premise";
@@ -8,7 +9,9 @@ import { Story } from "@/components/sections/story";
 import { Signals } from "@/components/sections/signals";
 import { Production } from "@/components/sections/production";
 import { Writing } from "@/components/sections/writing";
+import { Feed, FeedPlaceholder } from "@/components/sections/feed";
 import { Contact } from "@/components/sections/contact";
+import { Playground } from "@/components/sections/playground";
 
 export default function HomePage() {
   return (
@@ -23,7 +26,11 @@ export default function HomePage() {
       <Signals />
       <Production />
       <Writing />
+      <Suspense fallback={<FeedPlaceholder />}>
+        <Feed />
+      </Suspense>
       <Contact />
+      <Playground />
     </>
   );
 }

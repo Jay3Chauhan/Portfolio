@@ -1,5 +1,5 @@
 import { Magnetic } from "@/components/primitives/magnetic";
-import { Reveal } from "@/components/primitives/split-text";
+import { DepthCard, SlideReveal } from "@/components/primitives/scroll-effects";
 import { SectionHeader } from "@/components/primitives/section-header";
 import { apps, pipeline } from "@/content/production";
 import { archive } from "@/content/work";
@@ -15,8 +15,10 @@ export function Production() {
       />
 
       <div className="gutter mt-10 grid gap-4 sm:mt-14 md:grid-cols-3 md:gap-px">
+        {/* Perspective entrance, not a flat fade — the three plates tip up in
+            sequence so the grid reads as physical cards. */}
         {apps.map((app, i) => (
-          <Reveal key={app.id} delay={i * 0.07} className="h-full">
+          <DepthCard key={app.id} delay={i * 0.1} className="h-full">
             <article className="border-line bg-paper-raised group flex h-full flex-col border p-6 sm:p-7 transition-colors duration-500 hover:border-line-strong">
               <div className="flex items-baseline justify-between gap-3">
                 <span className="label text-pine">{app.category}</span>
@@ -49,12 +51,13 @@ export function Production() {
                       className="label link-wipe text-ink"
                     >
                       {link.store} ↗
+                      <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                   </Magnetic>
                 ))}
               </div>
             </article>
-          </Reveal>
+          </DepthCard>
         ))}
       </div>
 
@@ -79,10 +82,16 @@ export function Production() {
           </p>
         </div>
 
+        {/* Archive rows assemble from alternating edges — a different read from
+            the app plates above, so the two lists don't blur together. */}
         <ul className="mt-8 sm:mt-10">
           {archive.map((item, i) => (
             <li key={item.name} className="rule-b">
-              <Reveal delay={i * 0.05} y={18}>
+              <SlideReveal
+                delay={i * 0.05}
+                distance={38}
+                from={i % 2 === 0 ? "left" : "right"}
+              >
                 <a
                   href={item.href}
                   target="_blank"
@@ -107,9 +116,10 @@ export function Production() {
                   </span>
                   <span className="label text-mist group-hover:text-ink transition-colors">
                     GitHub ↗
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </span>
                 </a>
-              </Reveal>
+              </SlideReveal>
             </li>
           ))}
         </ul>

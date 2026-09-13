@@ -8,6 +8,7 @@ import {
   getBlogListJsonLd,
   getBreadcrumbJsonLd,
   getWebPageJsonLd,
+  serializeJsonLd,
 } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -50,7 +51,7 @@ export default function BlogPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
 
       <div className="gutter pt-[calc(var(--nav-h)+clamp(4rem,10vh,7rem))]">

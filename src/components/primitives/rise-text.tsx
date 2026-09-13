@@ -37,8 +37,11 @@ export function RiseText({
           aria-hidden="true"
           className={cn("inline-flex overflow-hidden align-bottom", lineClassName)}
         >
+          {/* No `will-change` here: this fires once at load, and hinting every
+              hero word would hold a composited layer per word for the life of
+              the page. */}
           <span
-            className="animate-rise inline-block will-change-transform"
+            className="animate-rise inline-block"
             style={{ animationDelay: `${delay + i * stagger}s` }}
           >
             {word}

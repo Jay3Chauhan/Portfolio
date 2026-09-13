@@ -37,6 +37,24 @@ times — an active index, or a threshold crossing via `useMotionValueEvent`.
   On every reveal element it makes the page slower, not faster.
 - Reduced motion: `<MotionConfig reducedMotion="user">` covers Motion, and Lenis
   handles it natively. Only hand-roll for parallax driven by MotionValues.
+- Gate every scroll MotionValue behind `useHydrated`. Bound to `style`, they
+  serialise a transform into the SSR markup that the first client paint then
+  disagrees with. Give the ungated branch an explicit resting style — an unbound
+  MotionValue falls back to `opacity: 1` / `scale: 1`, which paints veils and
+  ghost layers at full strength before hydration.
+
+## Don't scrub huge surfaces per frame
+
+Scroll-driven transforms are cheap on small elements and ruinous on large ones.
+Scrubbing `scale`/`opacity` on the four `86vw` panels in `sections/work.tsx` —
+inside `Tilt`'s `preserve-3d` context, while the track itself translates — forces
+four viewport-sized layers to re-rasterise every frame and **crashes the
+renderer**. That section dims via a CSS class toggled off the active index
+instead; keep it that way.
+
+Per-frame scrub is for one small element (a figure, a hairline, a ghost
+numeral). For cards, use a one-shot entrance (`DepthCard`, `SlideReveal`) or a
+low-amplitude `ScrollLift`, all in `primitives/scroll-effects.tsx`.
 
 ## Client boundaries
 

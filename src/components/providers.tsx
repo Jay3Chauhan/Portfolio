@@ -1,6 +1,7 @@
 "use client";
 
 import { MotionConfig } from "motion/react";
+import { ThemeSync } from "@/components/chrome/theme-sync";
 import { SmoothScroll } from "@/components/primitives/smooth-scroll";
 
 /**
@@ -13,6 +14,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       reducedMotion="user"
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
+      <ThemeSync />
       <SmoothScroll>{children}</SmoothScroll>
     </MotionConfig>
   );

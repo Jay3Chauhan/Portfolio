@@ -70,7 +70,7 @@ export function MobileIndex() {
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: 6 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-auto border-line bg-paper/95 label text-ink inline-flex items-center gap-2.5 rounded-full border px-3.5 py-2 shadow-[0_8px_30px_-18px_rgba(0,0,0,0.45)] backdrop-blur-xl"
+            className="pointer-events-auto border-line bg-paper/95 label text-ink inline-flex min-h-11 items-center gap-2.5 rounded-full border px-4 shadow-[0_8px_30px_-18px_rgba(0,0,0,0.45)] backdrop-blur-xl"
           >
             <span className="text-whisper tabular-nums">{current.index}</span>
             <span aria-hidden="true" className="bg-line-strong h-3 w-px" />

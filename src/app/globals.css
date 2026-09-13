@@ -11,50 +11,42 @@
    ========================================================================== */
 
 :root {
-  color-scheme: light;
+  /* `light dark` lets `light-dark()` follow the OS until a `.light` / `.dark`
+     class on <html> pins one scheme. First paint needs no JS. */
+  color-scheme: light dark;
 
-  --paper: #edeae2;
-  --paper-raised: #f4f2ec;
-  --paper-sunk: #e4e0d6;
-  --ink: #16171a;
+  --paper: light-dark(#edeae2, #121316);
+  --paper-raised: light-dark(#f4f2ec, #191a1e);
+  --paper-sunk: light-dark(#e4e0d6, #0d0e10);
+  --ink: light-dark(#16171a, #e9e6de);
   /* Both greys clear WCAG AA (4.5:1) against --paper. Do not lighten them:
      the micro-label scale is 11px, so it is measured as normal-size text. */
-  --mist: #4f4e4a;
-  --whisper: #68675f;
-  --line: #d6d1c6;
-  --line-strong: #c0baab;
-  --pine: #1e4a3f;
-  --pine-soft: #e0e6e0;
-  --ember: #a33d18;
+  --mist: light-dark(#4f4e4a, #a3a099);
+  /* Dark whisper is tuned against --paper-raised (4.97:1), the lightest
+     surface this grey sits on. */
+  --whisper: light-dark(#68675f, #8b8982);
+  --line: light-dark(#d6d1c6, #26272c);
+  --line-strong: light-dark(#c0baab, #383941);
+  --pine: light-dark(#1e4a3f, #8fbfaa);
+  --pine-soft: light-dark(#e0e6e0, #1b2723);
+  --ember: light-dark(#a33d18, #e0794c);
 
-  --grain-opacity: 0.028;
+  --grain-opacity: light-dark(0.028, 0.04);
   --nav-h: 56px;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 @media (min-width: 640px) {
   :root {
     --nav-h: 68px;
   }
-}
-
-.dark {
-  color-scheme: dark;
-
-  --paper: #121316;
-  --paper-raised: #191a1e;
-  --paper-sunk: #0d0e10;
-  --ink: #e9e6de;
-  --mist: #a3a099;
-  /* Tuned against --paper-raised, not --paper. Raised card surfaces are the
-     lightest thing this grey sits on, so they set the AA floor (4.97:1). */
-  --whisper: #8b8982;
-  --line: #26272c;
-  --line-strong: #383941;
-  --pine: #8fbfaa;
-  --pine-soft: #1b2723;
-  --ember: #e0794c;
-
-  --grain-opacity: 0.04;
 }
 
 @theme inline {
@@ -284,7 +276,13 @@
     mix-blend-mode: multiply;
   }
 
-  .dark .grain {
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) .grain {
+      mix-blend-mode: screen;
+    }
+  }
+
+  html.dark .grain {
     mix-blend-mode: screen;
   }
 }

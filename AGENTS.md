@@ -37,14 +37,17 @@ npm run typecheck      # tsc --noEmit
 ## Layout
 
 ```
+docs/           Operator setup (env, mail, SEO, deploy) — not the blog
+content/blog/   Markdown posts
 src/
   app/          Routes. Server Components by default.
+  app/actions/  Server actions (contact)
   components/
     primitives/ Reusable motion + layout building blocks
     chrome/     Nav, footer, scroll progress, theme toggle
     sections/   One file per numbered homepage section
   content/      ALL copy and data. Typed. No copy lives in components.
-  lib/          fonts, seo, blog, utils
+  lib/          fonts, seo, blog, linkedin, theme, utils
 ```
 
 ## Non-negotiables
@@ -54,8 +57,8 @@ src/
    field to the relevant content module first.
 2. **Never hardcode a colour.** Use the semantic Tailwind tokens (`bg-paper`,
    `text-ink`, `text-mist`, `border-line`, `text-pine`). New colours go in the
-   `:root` / `.dark` blocks of `globals.css` and get a `@theme inline` mapping so
-   both themes stay in lockstep.
+   `:root` `light-dark()` pairs of `globals.css` and get a `@theme inline` mapping
+   so both schemes stay in lockstep.
 3. **Animate only `transform` and `opacity`.** Anything animating `width`,
    `height`, `top` or `margin` on scroll produces layout shift on every frame.
 4. **Never `setState` in a scroll callback.** Write to a `MotionValue`, or use a
