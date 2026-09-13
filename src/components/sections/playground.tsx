@@ -38,7 +38,7 @@ export function Playground() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="pt-section gutter pb-[clamp(3rem,8vh,6rem)]">
+    <section className="pt-section gutter pb-12 sm:pb-[clamp(3rem,8vh,6rem)]">
       <Reveal>
         <div className="rule-t flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 pt-6">
           <p className="label text-whisper">{playground.kicker}</p>
@@ -62,7 +62,7 @@ export function Playground() {
       <div
         ref={trayRef}
         data-lenis-prevent
-        className="border-line bg-paper-sunk relative mt-12 h-[clamp(19rem,46vw,26rem)] overflow-hidden border"
+        className="border-line bg-paper-sunk relative mt-8 h-[min(18.5rem,58svh)] overflow-hidden border sm:mt-12 sm:h-[clamp(19rem,46vw,26rem)]"
       >
         <div
           aria-hidden="true"

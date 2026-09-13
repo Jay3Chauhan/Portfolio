@@ -22,12 +22,8 @@ type StackCardsProps = {
 /**
  * Sticky principle deck.
  *
- * Desktop (`lg+`): each card owns a scroll runway (`lg:h-[…]`) and pins with
- * `lg:sticky`. Later cards cover earlier ones; a paper veil (not scale) dims
- * the card underneath so text never shows through.
- *
- * Mobile: normal document flow with gaps — no sticky, no multi-svh blank run.
- * Sticky/height are pure CSS breakpoints so SSR HTML matches the client.
+ * Each card owns a scroll runway and pins. Later cards cover earlier ones;
+ * a paper veil (not scale) dims the card underneath so text never shows through.
  */
 export function StackCards({
   children,
@@ -89,15 +85,11 @@ function StackItem({
   return (
     <div
       className={cn(
-        "relative",
-        // Mobile: stacked with breathing room, no pin.
-        "mb-5 last:mb-0 lg:mb-0",
-        // Desktop: one viewport-ish of scroll per card so they pin in sequence.
-        "lg:h-[min(62svh,36rem)]",
+        "relative h-[min(70svh,28rem)] lg:h-[min(62svh,36rem)]",
       )}
     >
       <div
-        className="lg:sticky"
+        className="sticky"
         style={{
           top: `calc(var(--nav-h) + ${restOffset} + ${index * 0.85}rem)`,
           zIndex: index + 1,

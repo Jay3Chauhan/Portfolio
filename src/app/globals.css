@@ -49,6 +49,12 @@ html.dark {
   }
 }
 
+@media (min-width: 1024px) {
+  :root {
+    --spacing-section: clamp(4.5rem, 11vh, 11rem);
+  }
+}
+
 @theme inline {
   --color-paper: var(--paper);
   --color-paper-raised: var(--paper-raised);
@@ -90,8 +96,9 @@ html.dark {
   --text-micro--letter-spacing: 0.22em;
 
   --spacing-gutter: clamp(1.25rem, 4vw, 4rem);
-  /* Tighter on small screens so sections don't feel like empty voids. */
-  --spacing-section: clamp(4.5rem, 11vh, 11rem);
+  /* Compact on phones so stacked sections don't open as empty voids.
+     Desktop keeps the original print-scale rhythm. */
+  --spacing-section: clamp(3.25rem, 8vh, 6.5rem);
 
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-snap: cubic-bezier(0.2, 0, 0, 1);
@@ -460,9 +467,19 @@ html.dark {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* `both` fill-mode + a 0.01ms duration leaves RiseText/fade stuck on the
+     hidden `from` keyframe. Kill the animation so the type stays painted. */
+  .animate-rise,
+  .animate-fade {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 
   .grain {

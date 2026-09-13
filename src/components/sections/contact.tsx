@@ -10,7 +10,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="pt-section relative scroll-mt-24 overflow-hidden pb-[clamp(4rem,10vh,8rem)]"
+      className="pt-section relative scroll-mt-24 overflow-hidden pb-12 sm:pb-[clamp(4rem,10vh,8rem)]"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-24 -z-10">
         <Parallax x={["8%", "-6%"]} opacity={[0.035, 0.07]}>
@@ -29,7 +29,7 @@ export function Contact() {
           className="font-display text-display max-w-[13ch] font-light"
         />
 
-        <div className="mt-16 grid gap-x-16 gap-y-14 lg:grid-cols-[1fr_1fr]">
+        <div className="mt-8 grid gap-x-16 gap-y-14 sm:mt-16 lg:grid-cols-[1fr_1fr]">
           <div>
             <Reveal>
               <p className="label text-whisper">Direct</p>

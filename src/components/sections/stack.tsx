@@ -31,12 +31,12 @@ export function Stack() {
         lede="Four disciplines carrying real weight, measured by where the build time actually goes."
       />
 
-      <div className="gutter mt-16">
+      <div className="gutter mt-8 sm:mt-16">
         <div
           role="tablist"
           aria-label="Engineering disciplines"
           onKeyDown={onKeyDown}
-          className="rule-t rule-b flex flex-wrap"
+          className="rule-t rule-b grid grid-cols-2 lg:flex"
         >
           {disciplines.map((discipline, i) => (
             <button
@@ -52,7 +52,7 @@ export function Stack() {
               tabIndex={index === i ? 0 : -1}
               onClick={() => setIndex(i)}
               className={cn(
-                "label relative flex-1 cursor-pointer px-2 py-5 text-left transition-colors duration-400 sm:text-center",
+                "label relative cursor-pointer px-2 py-5 text-left transition-colors duration-400 sm:text-center lg:flex-1",
                 index === i ? "text-ink" : "text-whisper hover:text-mist",
               )}
             >

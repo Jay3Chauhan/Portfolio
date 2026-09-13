@@ -114,7 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
           <MobileIndex />
           {/* Solid paper plane so the sticky footer can reveal underneath. */}
-          <main className="bg-paper relative z-10 pb-20 xl:pb-0">{children}</main>
+          <main className="bg-paper relative z-10 lg:pb-20 xl:pb-0">{children}</main>
           <div className="relative z-0">
             <Footer />
           </div>

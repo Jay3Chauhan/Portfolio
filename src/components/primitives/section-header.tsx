@@ -40,7 +40,7 @@ export function SectionHeader({
           as="h2"
           text={title}
           className={cn(
-            "font-display text-title mt-10 max-w-[16ch] font-light",
+            "font-display text-title mt-4 max-w-[16ch] font-light sm:mt-10",
             align === "wide" && "max-w-[22ch]",
           )}
         />
@@ -51,7 +51,7 @@ export function SectionHeader({
           as="p"
           text={lede}
           stagger={0.012}
-          className="text-lead text-mist mt-8 max-w-[46ch] font-light"
+          className="text-lead text-mist mt-5 max-w-[46ch] font-light sm:mt-8"
         />
       ) : null}
     </header>

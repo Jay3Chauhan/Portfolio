@@ -77,7 +77,8 @@ src/
   every visual fragment `aria-hidden`.
 - Decorative marquees, oversized ghost numerals and figure watermarks are
   `aria-hidden`.
-- Pinned/horizontal scroll sections degrade to a plain scrollable rail under
-  `prefers-reduced-motion` — see the `pinned` guard in `sections/work.tsx`.
+- Pinned / horizontal scroll is a `lg+` enhancement. Work and Story must
+  fall back to a swipe rail / stacked list below that breakpoint — a 100svh
+  sticky pin on a phone is empty vertical scroll, not an effect.
 - Interactive controls need visible `:focus-visible` state; the global outline is
   defined once in `globals.css`.

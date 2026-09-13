@@ -9,14 +9,14 @@ export function Approach() {
     <section id="approach" className="pt-section scroll-mt-24">
       <SectionHeader index="04" kicker="Approach" title="How the work gets made." />
 
-      <div className="gutter mt-10 overflow-visible sm:mt-14">
+      <div className="gutter mt-8 overflow-visible sm:mt-14">
         <ScrollReadAlong
           text={manifesto}
           className="font-display max-w-[34ch] text-[clamp(1.35rem,3.2vw,2.5rem)] leading-[1.35] font-light tracking-tight sm:max-w-[28ch]"
         />
       </div>
 
-      <div className="rule-t rule-b mt-12 py-5 sm:mt-14">
+      <div className="rule-t rule-b mt-8 py-5 sm:mt-14">
         <VelocityMarquee
           items={method}
           separator="—"
@@ -25,7 +25,7 @@ export function Approach() {
         />
       </div>
 
-      <div className="gutter mt-12 sm:mt-14">
+      <div className="gutter mt-8 sm:mt-14">
         <StackCards cardClassName="p-6 sm:p-9 lg:p-11" restOffset="1rem">
           {principles.map((principle) => (
             <div key={principle.index}>

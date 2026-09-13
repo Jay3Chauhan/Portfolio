@@ -18,7 +18,7 @@ export function FeedPlaceholder() {
         title={feed.title}
         lede={feed.lede}
       />
-      <div className="gutter mt-14 h-[18rem]" aria-hidden="true" />
+      <div className="gutter mt-8 h-24 sm:mt-14" aria-hidden="true" />
     </section>
   );
 }

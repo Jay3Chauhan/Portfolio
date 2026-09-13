@@ -30,8 +30,8 @@ export function Story() {
   const reduce = useReducedMotion();
   const hydrated = useHydrated();
 
-  // Sticky pin is an enhancement. Reduced-motion and the first paint get a
-  // linear chapter list that scrolls like any other section.
+  // Same chapter pin as desktop. The plate is capped on small screens so the
+  // 100svh frame stays filled with the chapter, not empty paper.
   const pinned = hydrated && !reduce;
 
   const { scrollYProgress } = useScroll({
@@ -72,55 +72,51 @@ export function Story() {
     else window.scrollTo({ top, behavior: "smooth" });
   }
 
-  if (!pinned) {
-    return (
-      <section id="story" className="pt-section scroll-mt-24">
-        <SectionHeader index="05" kicker="Story" title="Five years, quietly compounding." />
-        <ol className="gutter mt-14 space-y-16">
-          {chapters.map((chapter) => (
-            <li
-              key={chapter.year}
-              id={`chapter-${chapter.year}`}
-              className="rule-t grid gap-8 pt-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16"
-            >
-              <figure>
-                <div className="text-ink relative aspect-[4/3] w-full">
-                  <FigurePlate
-                    kind={chapter.plate}
-                    label={chapter.caption}
-                    className="h-full w-full"
-                  />
-                </div>
-                <figcaption className="label text-whisper mt-4">
-                  Fig. {chapter.index} — {chapter.caption}
-                </figcaption>
-              </figure>
-              <div>
-                <p className="label text-pine">
-                  Chapter {chapter.index}
-                  <span className="text-whisper px-2">·</span>
-                  <span className="text-mist">{chapter.marker}</span>
-                </p>
-                <h3 className="font-display mt-6 max-w-[16ch] text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[0.98] font-light tracking-tight">
-                  {chapter.title}
-                </h3>
-                <p className="text-mist mt-6 max-w-[52ch] text-sm leading-relaxed font-light sm:text-base">
-                  {chapter.body}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-    );
-  }
-
   const chapter = chapters[index];
 
   return (
     <section id="story" className="pt-section scroll-mt-24">
       <SectionHeader index="05" kicker="Story" title="Five years, quietly compounding." />
 
+      {!pinned ? (
+        <div ref={sectionRef}>
+        <ol className="gutter mt-10 space-y-10 sm:mt-14 sm:space-y-16">
+          {chapters.map((item) => (
+            <li
+              key={item.year}
+              id={`chapter-${item.year}`}
+              className="rule-t grid gap-8 pt-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16"
+            >
+              <figure>
+                <div className="text-ink relative aspect-[4/3] w-full">
+                  <FigurePlate
+                    kind={item.plate}
+                    label={item.caption}
+                    className="h-full w-full"
+                  />
+                </div>
+                <figcaption className="label text-whisper mt-4">
+                  Fig. {item.index} — {item.caption}
+                </figcaption>
+              </figure>
+              <div>
+                <p className="label text-pine">
+                  Chapter {item.index}
+                  <span className="text-whisper px-2">·</span>
+                  <span className="text-mist">{item.marker}</span>
+                </p>
+                <h3 className="font-display mt-6 max-w-[16ch] text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[0.98] font-light tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="text-mist mt-6 max-w-[52ch] text-sm leading-relaxed font-light sm:text-base">
+                  {item.body}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        </div>
+      ) : (
       <div
         ref={sectionRef}
         className="relative mt-12"
@@ -155,7 +151,7 @@ export function Story() {
               </p>
             </nav>
 
-            <div className="grid items-center gap-8 pt-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:pt-12">
+            <div className="grid items-center gap-5 pt-5 sm:gap-8 sm:pt-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:pt-12">
               {/* The pin is a fixed 100svh box with `overflow-hidden`, so the
                   plate is capped tightly on phones: at the old 26svh the plate
                   plus the longest chapter body overflowed a 667px viewport and
@@ -186,11 +182,11 @@ export function Story() {
                       <span className="text-mist">{chapter.marker}</span>
                     </p>
 
-                    <h3 className="font-display mt-6 max-w-[16ch] text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[0.98] font-light tracking-tight">
+                    <h3 className="font-display mt-4 max-w-[16ch] text-[clamp(1.5rem,3.6vw,3.25rem)] leading-[0.98] font-light tracking-tight sm:mt-6">
                       {chapter.title}
                     </h3>
 
-                    <p className="text-mist mt-6 max-w-[52ch] text-sm leading-relaxed font-light sm:text-base">
+                    <p className="text-mist mt-4 max-w-[52ch] text-sm leading-relaxed font-light sm:mt-6 sm:text-base">
                       {chapter.body}
                     </p>
                   </motion.div>
@@ -215,6 +211,7 @@ export function Story() {
           </div>
         </div>
       </div>
+      )}
     </section>
   );
 }

@@ -45,8 +45,8 @@ export function Work() {
     };
   }, []);
 
-  // Pinning is an enhancement: the first render (and any reduced-motion
-  // session) gets a plain swipeable rail instead.
+  // Same vertical-to-horizontal pin as desktop. Cards are sized to the
+  // sticky frame so the runway is motion, not empty paper.
   const pinned = hydrated && !reduce && distance > 0;
 
   const { scrollYProgress } = useScroll({
@@ -69,40 +69,44 @@ export function Work() {
       <div
         ref={sectionRef}
         style={pinned ? { height: `calc(100svh + ${distance}px)` } : undefined}
-        className="relative mt-14"
+        className="relative mt-6 sm:mt-10"
       >
         <div
           className={cn(
             "flex flex-col justify-center",
-            pinned && "sticky top-0 h-[100svh] overflow-hidden pt-[var(--nav-h)] pb-4",
+            pinned && "sticky top-0 h-[100svh] overflow-hidden pt-[var(--nav-h)] pb-3",
           )}
         >
           <motion.div
             ref={trackRef}
             style={pinned ? { x } : undefined}
             className={cn(
-              "flex w-max gap-6 px-[var(--spacing-gutter)]",
-              pinned && "will-change-transform",
-              !pinned && "w-full snap-x snap-mandatory overflow-x-auto pb-6",
+              "flex gap-4 px-[var(--spacing-gutter)] sm:gap-6",
+              pinned
+                ? "w-max will-change-transform"
+                : "w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
             )}
           >
             {work.map((item, i) => (
               <WorkPanel
                 key={item.id}
                 item={item}
+                compact={pinned}
                 active={pinned ? current === i : true}
                 dimmed={pinned && current !== i}
               />
             ))}
           </motion.div>
 
-          <div className="gutter mt-8 flex items-center gap-6">
-            <div className="bg-line relative h-px flex-1 overflow-hidden">
-              <motion.div
-                className="bg-ink absolute inset-0 origin-left"
-                style={{ scaleX: pinned ? scrollYProgress : 0 }}
-              />
-            </div>
+          <div className="gutter mt-4 flex items-center gap-6 sm:mt-6">
+            {pinned ? (
+              <div className="bg-line relative h-px flex-1 overflow-hidden">
+                <motion.div
+                  className="bg-ink absolute inset-0 origin-left"
+                  style={{ scaleX: scrollYProgress }}
+                />
+              </div>
+            ) : null}
             <div className="label text-mist flex gap-2 tabular-nums" aria-hidden="true">
               {work.map((item, i) => (
                 <span
@@ -127,10 +131,12 @@ function WorkPanel({
   item,
   active,
   dimmed,
+  compact,
 }: {
   item: WorkItem;
   active: boolean;
   dimmed: boolean;
+  compact: boolean;
 }) {
   return (
     <Tilt className="shrink-0 snap-center">
@@ -141,7 +147,8 @@ function WorkPanel({
       <article
         className={cn(
           "border-line bg-paper-raised/60 relative flex w-[86vw] flex-col",
-          "border p-5 transition-[transform,opacity,border-color] duration-700 ease-editorial sm:p-9 lg:w-[62vw] xl:w-[54vw]",
+          "border p-4 transition-[transform,opacity,border-color] duration-700 ease-editorial sm:p-9 lg:w-[62vw] xl:w-[54vw]",
+          compact && "lg:max-h-[calc(100svh-var(--nav-h)-8rem)]",
           active && "border-line-strong",
           // 0.72 is the opacity floor the palette is tuned to. At the previous
           // 0.45 the peeking neighbour's body copy fell under WCAG AA.
@@ -164,15 +171,20 @@ function WorkPanel({
           <span className="label text-pine">{item.tag}</span>
         </div>
 
-        <div className="relative mt-auto grid gap-6 pt-7 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+        <div className="relative mt-auto grid gap-5 pt-5 sm:gap-6 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
-            <h3 className="font-display text-[clamp(2rem,4.2vw,3.5rem)] leading-[0.92] font-light tracking-tight">
+            <h3 className="font-display text-[clamp(1.75rem,4.2vw,3.5rem)] leading-[0.92] font-light tracking-tight">
               {item.name}
             </h3>
             <p className="font-display text-mist mt-2 text-base font-light italic sm:mt-3 sm:text-lg">
               {item.subtitle}
             </p>
-            <p className="text-mist mt-5 max-w-[46ch] text-sm leading-[1.6] font-light sm:mt-6 sm:text-base sm:leading-relaxed">
+            <p
+              className={cn(
+                "text-mist mt-4 max-w-[46ch] text-sm leading-[1.55] font-light sm:mt-6 sm:text-base sm:leading-relaxed",
+                compact && "line-clamp-3 sm:line-clamp-5 lg:line-clamp-none",
+              )}
+            >
               {item.description}
             </p>
           </div>

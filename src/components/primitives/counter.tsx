@@ -25,7 +25,7 @@ type CounterProps = {
  */
 export function Counter({ to, suffix = "", duration = 1.6, className }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const inView = useInView(ref, { once: true, amount: 0.2 });
   const reduce = useReducedMotion();
 
   const count = useMotionValue(0);

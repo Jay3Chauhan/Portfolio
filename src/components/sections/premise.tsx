@@ -59,7 +59,7 @@ export function Premise() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <dl className="mt-8 pb-14 sm:mt-10 sm:pb-0">
+            <dl className="mt-8 sm:mt-10">
               {dossier.map((row) => (
                 <div
                   key={row.key}
@@ -74,7 +74,7 @@ export function Premise() {
         </div>
       </div>
 
-      <div className="gutter mt-16 overflow-visible sm:mt-20 lg:mt-24">
+      <div className="gutter mt-10 overflow-visible sm:mt-20 lg:mt-24">
         <RuleLine />
         <dl className="grid grid-cols-2 overflow-visible md:grid-cols-4">
           {figures.map((figure, i) => (

@@ -32,6 +32,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
         autoRaf: false,
         lerp: 0.11,
         smoothWheel: true,
+        // Touch stays native. Syncing touch through Lenis on iOS is what made
+        // `useScroll` / `whileInView` look like they had died on phones.
         syncTouch: false,
         // Off by default in Lenis — without this, hash links stop working.
         anchors: { offset: -80 },

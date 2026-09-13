@@ -5,7 +5,7 @@ const year = new Date().getFullYear();
 
 export function Footer() {
   return (
-    <footer className="bg-paper-sunk sticky bottom-0">
+    <footer className="bg-paper-sunk lg:sticky lg:bottom-0">
       <div className="gutter border-line border-t pt-14">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>

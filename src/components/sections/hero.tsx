@@ -6,12 +6,14 @@ import { Marquee } from "@/components/primitives/marquee";
 import { RiseText } from "@/components/primitives/rise-text";
 import { ScrollCue } from "@/components/primitives/scroll-cue";
 import { identity, ticker } from "@/content/site";
+import { useDesktop } from "@/lib/use-desktop";
 import { useHydrated } from "@/lib/use-hydrated";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const hydrated = useHydrated();
+  const desktop = useDesktop();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -34,13 +36,16 @@ export function Hero() {
   // The hero is above the fold, so nothing here may depend on hydration to be
   // visible. Gating only keeps the MotionValues out of the SSR markup; every
   // range starts at its identity value, so the ungated paint is the correct one.
-  const scrub = hydrated && !reduce;
+  // Scrub is desktop-only. On a short phone hero, a few pixels of scroll
+  // (or a bad first measurement) drives this opacity to 0 and leaves a
+  // blank band where the headline should be.
+  const scrub = hydrated && desktop && !reduce;
 
   return (
     <section
       ref={ref}
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-[var(--nav-h)]"
+      className="relative flex flex-col overflow-hidden pt-[var(--nav-h)] lg:min-h-[100svh] lg:justify-between"
     >
       <h1 className="sr-only">
         {identity.fullName} — {identity.role}. {identity.tagline.join(" ")}
@@ -48,7 +53,7 @@ export function Hero() {
 
       <motion.div
         style={scrub ? { y: contentY, opacity: contentOpacity } : undefined}
-        className="gutter flex flex-1 flex-col justify-center pt-6 pb-8 sm:pt-12"
+        className="gutter flex flex-col pt-8 pb-8 lg:flex-1 lg:justify-center lg:pt-12 lg:pb-8"
       >
         <div
           className="text-mist flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1"
@@ -69,7 +74,7 @@ export function Hero() {
           </span>
         </div>
 
-        <div className="mt-[clamp(2.5rem,7vh,5rem)]" aria-hidden="true">
+        <div className="mt-8 sm:mt-[clamp(2.5rem,7vh,5rem)]" aria-hidden="true">
           {identity.tagline.map((line, i) => (
             <RiseText
               key={line}
@@ -82,7 +87,7 @@ export function Hero() {
         </div>
 
         <p
-          className="text-mist animate-fade mt-[clamp(2rem,5vh,3.5rem)] max-w-[52ch] text-base leading-relaxed font-light sm:text-lg"
+          className="text-mist animate-fade mt-6 max-w-[52ch] text-base leading-relaxed font-light sm:mt-[clamp(2rem,5vh,3.5rem)] sm:text-lg"
           style={{ animationDelay: "0.7s" }}
         >
           {identity.premise}

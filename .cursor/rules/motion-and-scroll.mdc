@@ -42,6 +42,10 @@ times — an active index, or a threshold crossing via `useMotionValueEvent`.
   disagrees with. Give the ungated branch an explicit resting style — an unbound
   MotionValue falls back to `opacity: 1` / `scale: 1`, which paints veils and
   ghost layers at full strength before hydration.
+- Pinned / horizontal scroll is a `lg+` enhancement. Work and Story fall back
+  to a swipe rail / stacked list below that breakpoint — a 100svh sticky pin
+  on a phone is empty vertical scroll, not an effect. `useDesktop` is the
+  shared gate (`src/lib/use-desktop.ts`).
 
 ## Don't scrub huge surfaces per frame
 

@@ -55,7 +55,7 @@ export function FigurePlate({ kind, className, label }: PlateProps) {
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.2 }}
       fill="none"
       stroke="currentColor"
       strokeWidth={1}

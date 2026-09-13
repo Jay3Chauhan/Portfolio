@@ -22,7 +22,7 @@ export function Writing() {
       {/* Each row owns its own scroll pass, so they drift against one another
           on the way through the viewport instead of firing once and freezing.
           Transform only — dimming this copy would cost contrast. */}
-      <ul className="gutter mt-16">
+      <ul className="gutter mt-8 sm:mt-16">
         {posts.map((post) => (
           <li key={post.slug} className="rule-t last:rule-b">
             {/* Keep the travel well under the row's 2rem padding or the copy

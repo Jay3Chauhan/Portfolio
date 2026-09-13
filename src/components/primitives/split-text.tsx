@@ -56,7 +56,7 @@ export function SplitText({
       custom={{ delay, stagger: reduce ? 0 : stagger }}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, amount: 0.35 }}
+      viewport={{ once, amount: 0.4, margin: "0px 0px -12% 0px" }}
     >
       <span className="sr-only">{text}</span>
       {words.map((word, i) => (
@@ -101,7 +101,7 @@ export function Reveal({
       className={cn("overflow-visible", className)}
       initial={{ opacity: 0, y: reduce ? 0 : y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, amount: 0.2, margin: "0px 0px -4% 0px" }}
+      viewport={{ once, amount: 0.35, margin: "0px 0px -10% 0px" }}
       transition={{ duration: 0.85, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
@@ -122,7 +122,7 @@ export function RuleLine({
       className={cn("bg-line h-px w-full origin-left", className)}
       initial={{ scaleX: 0 }}
       whileInView={{ scaleX: 1 }}
-      viewport={{ once: true, amount: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] }}
     />
   );

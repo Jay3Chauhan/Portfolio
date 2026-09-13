@@ -30,7 +30,7 @@ export function DepthCard({ children, className, delay = 0 }: BaseProps) {
       style={{ transformPerspective: 1400 }}
       initial={reduce ? { opacity: 0 } : { opacity: 0, y: 46, rotateX: 10, scale: 0.97 }}
       whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.2, margin: "0px 0px -6% 0px" }}
+      viewport={{ once: true, amount: 0.35, margin: "0px 0px -10% 0px" }}
       transition={{ duration: reduce ? 0.3 : 0.95, delay, ease: EASE }}
     >
       {children}
@@ -57,7 +57,7 @@ export function SlideReveal({
       className={className}
       initial={reduce ? { opacity: 0 } : { opacity: 0, x: offset }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, amount: 0.3, margin: "0px 0px -5% 0px" }}
+      viewport={{ once: true, amount: 0.35, margin: "0px 0px -10% 0px" }}
       transition={{ duration: reduce ? 0.3 : 0.9, delay, ease: EASE }}
     >
       {children}
